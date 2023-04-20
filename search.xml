@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Day01 Array Part01</title>
-    <url>/ZhaoYiwei0311/ZhaoYiwei0311.github.io.git/2023/04/20/Day01%20Array%20Part01/</url>
+    <url>/2023/04/20/Day01%20Array%20Part01/</url>
     <content><![CDATA[<h2 id="704-Binary-Search"><a href="#704-Binary-Search" class="headerlink" title="704 Binary Search"></a><a href="https://leetcode.cn/problems/binary-search/">704 Binary Search</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p> Given an array of integers nums which is sorted in ascending order, and an integer target, write a function to search target in nums. If target exists, then return its index. Otherwise, return -1.<br>​ You must write an algorithm with O(log n) runtime complexity.</p>
 <span id="more"></span>
 
