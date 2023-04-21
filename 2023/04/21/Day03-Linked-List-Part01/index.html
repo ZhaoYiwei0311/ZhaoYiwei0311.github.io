@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="203. Remove Linked List ElementsIntroGiven the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val &#x3D;&#x3D; val, and return the new head.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day03 Linked List Part01">
+<meta property="og:url" content="http://example.com/2023/04/21/Day03-Linked-List-Part01/index.html">
+<meta property="og:site_name" content="My_Study_Blog">
+<meta property="og:description" content="203. Remove Linked List ElementsIntroGiven the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val &#x3D;&#x3D; val, and return the new head.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-21T11:35:47.000Z">
+<meta property="article:modified_time" content="2023-04-21T11:37:14.555Z">
+<meta property="article:author" content="Zhao Yiwei">
+<meta property="article:tag" content="Two_Pointer">
+<meta property="article:tag" content="Linked_List">
+<meta property="article:tag" content="Dummy_Head">
+<meta property="article:tag" content="Recursion">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/04/21/Day03-Linked-List-Part01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Day03 Linked List Part01 | My_Study_Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">My_Study_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/21/Day03-Linked-List-Part01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day03 Linked List Part01
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-04-21 19:35:47 / Modified: 19:37:14" itemprop="dateCreated datePublished" datetime="2023-04-21T19:35:47+08:00">2023-04-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>9k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>8 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="203-Remove-Linked-List-Elements"><a href="#203-Remove-Linked-List-Elements" class="headerlink" title="203. Remove Linked List Elements"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-linked-list-elements/">203. Remove Linked List Elements</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val &#x3D;&#x3D; val, and return the new head.</p>
+<span id="more"></span>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Normal"><a href="#1-Normal" class="headerlink" title="1.Normal"></a>1.Normal</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Normal</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">removeElements</span><span class="params">(ListNode head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="comment">// 1.Head node is a problem because it does not have a pre node, therefore it must be dealt with alone.</span></span><br><span class="line">    <span class="keyword">while</span> (head != <span class="literal">null</span> &amp;&amp; head.val == val) &#123;</span><br><span class="line">        <span class="comment">// for defense, head must not be null</span></span><br><span class="line">        <span class="comment">// we use while instead of if here because there might be the case when head = [1,1,1] and val = 1. In such case, all head nodes should be deleted and if does not suffice</span></span><br><span class="line">        head = head.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2.Now that we have eliminated the threat from head node, it is time to delete nodes afterwards</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> head; <span class="comment">// it is essential to set a temporary index that points to head</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//      1           2           3           4</span></span><br><span class="line">    <span class="comment">//      cur         cur.n       cur.n.n</span></span><br><span class="line">    <span class="comment">//  suppose val = 2 and we can see that cur.n is to be deleted</span></span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="literal">null</span> &amp;&amp; cur.next != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// we have to get the next of cur, so cur must not be null;</span></span><br><span class="line">        <span class="comment">// we also have to get the val of cur.next, so cur.next must not be null</span></span><br><span class="line">        <span class="keyword">if</span> (cur.next.val == val) &#123; <span class="comment">// we have found the node to be deleted, it is cur.next</span></span><br><span class="line">            cur.next = cur.next.next; <span class="comment">// cur should jump twice and change its next to the cur.next.next, in which cur.next would be skipped</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// it is not the node to be deleted, cur moves afterwards</span></span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Dummy-Head"><a href="#2-Dummy-Head" class="headerlink" title="2.Dummy_Head"></a>2.Dummy_Head</h4><p>While facing linked list related questions, it is always a good idea to consider defining dummy head to avoid dealing with the case concerned with head node</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Dummy_Head</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">removeElements</span><span class="params">(ListNode head, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">dummy</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(-<span class="number">1</span>, head); <span class="comment">// set a dummy head to avoid dealing specially with head node;</span></span><br><span class="line">    <span class="comment">// two pointer is still necessary</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">pre</span> <span class="operator">=</span> dummy; <span class="comment">// one starts from dummy</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> head;  <span class="comment">// one starts from head</span></span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cur.val == val) &#123; <span class="comment">// we have found the node that meets our requirement, it is time to delete</span></span><br><span class="line">            pre.next = cur.next; <span class="comment">// the next node after pre should be the one after cur</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            pre = cur; <span class="comment">// the node is not the one to be deleted, so pre node moves afterwards</span></span><br><span class="line">        &#125;</span><br><span class="line">        cur = cur.next; <span class="comment">// in both cases, the cur should move afterwards</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dummy.next; <span class="comment">// we must return dummy.next because there might be the case when we would delete head node.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="707-Design-Linked-List"><a href="#707-Design-Linked-List" class="headerlink" title="707. Design Linked List"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/design-linked-list/">707. Design Linked List</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Design your implementation of the linked list. You can choose to use a singly or doubly linked list.</p>
+<p>A node in a singly linked list should have two attributes: val and next. val is the value of the current node, and next is a pointer&#x2F;reference to the next node.</p>
+<p>If you want to use the doubly linked list, you will need one more attribute prev to indicate the previous node in the linked list. Assume all nodes in the linked list are 0-indexed.</p>
+<p>Implement the MyLinkedList class:</p>
+<ul>
+<li><p><code>MyLinkedList()</code> Initializes the <code>MyLinkedList</code> object.</p>
+</li>
+<li><p>int get(int index) Get the value of the indexth node in the linked list. If the index is invalid, return -1.</p>
+</li>
+<li><p>void addAtHead(int val) Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list.</p>
+</li>
+<li><p>void addAtTail(int val) Append a node of value val as the last element of the linked list.</p>
+</li>
+<li><p>void addAtIndex(int index, int val) Add a node of value val before the indexth node in the linked list. If index equals the length of the linked list, the node will be appended to the end of the linked list. If index is greater than the length, the node will not be inserted.</p>
+</li>
+<li><p>void deleteAtIndex(int index) Delete the indexth node in the linked list, if the index is valid.</p>
+</li>
+</ul>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Dummy-Head"><a href="#1-Dummy-Head" class="headerlink" title="1.Dummy_Head"></a>1.Dummy_Head</h4><p>This question is a good one to  practice manipulating linked list. </p>
+<p>We still need to rely on dummy head in order to simplify the treatment of head node.</p>
+<p>Besides, the size of the list is also a key field to be utilized</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyLinkedList</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// the size of MyLinkedList</span></span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line">    <span class="comment">// dummy is the most important point in this question, its next is the original head node.</span></span><br><span class="line">    <span class="comment">// we will always start from dummy.</span></span><br><span class="line">    ListNode dummy;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyLinkedList</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// initialized</span></span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">        dummy = <span class="keyword">new</span> <span class="title class_">ListNode</span>(-<span class="number">1</span>, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123; <span class="comment">// for defense</span></span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> dummy;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= index; i++) &#123; <span class="comment">// here the end should be &lt;=, take the example of one node and we can figure out why</span></span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cur.val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtHead</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> dummy;</span><br><span class="line">        <span class="comment">// sequence is quite important</span></span><br><span class="line">        <span class="comment">//          0           2</span></span><br><span class="line">        <span class="comment">//          cur         cur.next</span></span><br><span class="line">        <span class="comment">// suppose we are going to add 1 as head</span></span><br><span class="line">        <span class="comment">//          0           1           2</span></span><br><span class="line">        <span class="comment">//          cur                     cur.next</span></span><br><span class="line">        <span class="comment">// 1.the next of 1 Node must be connected to cur.next first</span></span><br><span class="line">        <span class="comment">// 2.the cur.next then would be connected to 1 Node</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(val, cur.next);</span><br><span class="line">        cur.next = newNode;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtTail</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> dummy;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++) &#123; <span class="comment">// move to the tail, if boarder bothers again, take the example of one node again</span></span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(val, <span class="literal">null</span>);</span><br><span class="line">        cur.next = newNode;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtIndex</span><span class="params">(<span class="type">int</span> index, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; size) &#123; <span class="comment">// defense</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> dummy;</span><br><span class="line">        <span class="comment">// the key point is to know exactly the relationship between cur and the indexth node</span></span><br><span class="line">        <span class="comment">//          0           1           3</span></span><br><span class="line">        <span class="comment">//          cur         cur.n       cur.n.n</span></span><br><span class="line">        <span class="comment">// suppose we want to add 2 Node at index 1, which results in the example below</span></span><br><span class="line">        <span class="comment">//          0           1           2           3</span></span><br><span class="line">        <span class="comment">// then when will our cur stop iterating?</span></span><br><span class="line">        <span class="comment">// it should be like this</span></span><br><span class="line">        <span class="comment">//          0           1           2           3</span></span><br><span class="line">        <span class="comment">//                      cur         newNode     cur.n</span></span><br><span class="line">        <span class="comment">// because only by manipulating cur.next can we both know the previous node and the node to be added</span></span><br><span class="line">        <span class="comment">// and from the example, we know how to write for loop</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++) &#123;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// still sequence is quite important</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(val, cur.next);</span><br><span class="line">        cur.next = newNode;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">deleteAtIndex</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123; <span class="comment">// defense</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> dummy;</span><br><span class="line">        <span class="comment">// the key point is also to know exactly the relationship between cur and the indexth node</span></span><br><span class="line">        <span class="comment">//          0           1           2           3</span></span><br><span class="line">        <span class="comment">//          cur         cur.n</span></span><br><span class="line">        <span class="comment">// suppose index = 1, which means 2 is the node to be deleted</span></span><br><span class="line">        <span class="comment">//          0           1           2           3</span></span><br><span class="line">        <span class="comment">//                      cur         cur.n       cur.n.n</span></span><br><span class="line">        <span class="comment">// cur should stop before the node to be deleted</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++) &#123;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        cur.next = cur.next.next;</span><br><span class="line">        size--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Dummy-Head-But-More-Concise"><a href="#2-Dummy-Head-But-More-Concise" class="headerlink" title="2. Dummy_Head_But_More_Concise"></a>2. Dummy_Head_But_More_Concise</h4><p>Make addAtHead and addAtTail more concise by combining these two methods with addAtIndex</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyLinkedList</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// the size of MyLinkedList</span></span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line">    <span class="comment">// dummy is the most important point in this question, its next is the original head node.</span></span><br><span class="line">    <span class="comment">// we will always start from dummy.</span></span><br><span class="line">    ListNode dummy;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyLinkedList</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// initialized</span></span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">        dummy = <span class="keyword">new</span> <span class="title class_">ListNode</span>(-<span class="number">1</span>, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123; <span class="comment">// for defense</span></span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> dummy;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt;= index; i++) &#123; <span class="comment">// here the end should be &lt;=, take the example of one node and we can figure out why</span></span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cur.val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtHead</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">		addAtIndex(<span class="number">0</span>, val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtTail</span><span class="params">(<span class="type">int</span> val)</span> &#123;</span><br><span class="line">		addAtIndex(size, val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addAtIndex</span><span class="params">(<span class="type">int</span> index, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; size) &#123; <span class="comment">// defense</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> dummy;</span><br><span class="line">        <span class="comment">// the key point is to know exactly the relationship between cur and the indexth node</span></span><br><span class="line">        <span class="comment">//          0           1           3</span></span><br><span class="line">        <span class="comment">//          cur         cur.n       cur.n.n</span></span><br><span class="line">        <span class="comment">// suppose we want to add 2 Node at index 1, which results in the example below</span></span><br><span class="line">        <span class="comment">//          0           1           2           3</span></span><br><span class="line">        <span class="comment">// then when will our cur stop iterating?</span></span><br><span class="line">        <span class="comment">// it should be like this</span></span><br><span class="line">        <span class="comment">//          0           1           2           3</span></span><br><span class="line">        <span class="comment">//                      cur         newNode     cur.n</span></span><br><span class="line">        <span class="comment">// because only by manipulating cur.next can we both know the previous node and the node to be added</span></span><br><span class="line">        <span class="comment">// and from the example, we know how to write for loop</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++) &#123;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// still sequence is quite important</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">newNode</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(val, cur.next);</span><br><span class="line">        cur.next = newNode;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">deleteAtIndex</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size) &#123; <span class="comment">// defense</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> dummy;</span><br><span class="line">        <span class="comment">// the key point is also to know exactly the relationship between cur and the indexth node</span></span><br><span class="line">        <span class="comment">//          0           1           2           3</span></span><br><span class="line">        <span class="comment">//          cur         cur.n</span></span><br><span class="line">        <span class="comment">// suppose index = 1, which means 2 is the node to be deleted</span></span><br><span class="line">        <span class="comment">//          0           1           2           3</span></span><br><span class="line">        <span class="comment">//                      cur         cur.n       cur.n.n</span></span><br><span class="line">        <span class="comment">// cur should stop before the node to be deleted</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++) &#123;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">        &#125;</span><br><span class="line">        cur.next = cur.next.next;</span><br><span class="line">        size--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="206-Reverse-Linked-List"><a href="#206-Reverse-Linked-List" class="headerlink" title="206. Reverse Linked List"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">206. Reverse Linked List</a></h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>Given the head of a singly linked list, reverse the list, and return the reversed list.</p>
+<h3 id="Soulution"><a href="#Soulution" class="headerlink" title="Soulution"></a>Soulution</h3><h4 id="1-Two-Pointer"><a href="#1-Two-Pointer" class="headerlink" title="1.Two_Pointer"></a>1.Two_Pointer</h4><p>Two pointer, actually three pointer works quite well in this question.</p>
+<p>Still sequence is the issue that matters</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Two Pointer</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">reverseList</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">    <span class="comment">// actually we need three pointers in this question and they are pre, cur and cur</span></span><br><span class="line">    <span class="comment">//          null            1           2           3           4           null</span></span><br><span class="line">    <span class="comment">//          pre             cur         temp</span></span><br><span class="line">    <span class="comment">//          null            1           2           3           4           null</span></span><br><span class="line">    <span class="comment">//                          pre         cur         temp</span></span><br><span class="line">    <span class="comment">// in the end, it should be like this</span></span><br><span class="line">    <span class="comment">//          null            1           2           3           4           null</span></span><br><span class="line">    <span class="comment">//                                                              pre         cur</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">pre</span> <span class="operator">=</span> <span class="literal">null</span>; <span class="comment">// the most previous node should point to null, just as symmetrically, the next of end node points to null</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> head;</span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">temp</span> <span class="operator">=</span> cur.next; <span class="comment">// define our helper node to trace cur.next, otherwise cur loses its way afterwards</span></span><br><span class="line">        <span class="comment">// sequence is also important here</span></span><br><span class="line">        <span class="comment">// 1.cur should point to pre</span></span><br><span class="line">        cur.next = pre;</span><br><span class="line">        <span class="comment">// 2.pre should become cur</span></span><br><span class="line">        pre = cur;</span><br><span class="line">        <span class="comment">// 3.cur should be replaced with temp</span></span><br><span class="line">        cur = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> pre; <span class="comment">// seen from the example, pre is the node to be returned</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Recursion"><a href="#2-Recursion" class="headerlink" title="2. Recursion"></a>2. Recursion</h4><p>Based on the two pointer solution above, we can get an easier but harder to understand solution which utilizes recursion</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">reverseList</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">    <span class="comment">// pre should be null and cur should be head</span></span><br><span class="line">    <span class="keyword">return</span> recursion(head, <span class="literal">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">recursion</span><span class="params">(ListNode cur, ListNode pre)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (cur == <span class="literal">null</span>) &#123; <span class="comment">// the end of recursion</span></span><br><span class="line">        <span class="keyword">return</span> pre; <span class="comment">// still it is pre to be returned</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">temp</span> <span class="operator">=</span> cur.next; <span class="comment">// helper node is still needed to trace cur.next</span></span><br><span class="line">    cur.next = pre; <span class="comment">// reversed here</span></span><br><span class="line">    <span class="keyword">return</span> recursion(temp, cur); <span class="comment">// the nodes here have changed</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Two-Pointer/" rel="tag"># Two_Pointer</a>
+              <a href="/tags/Linked-List/" rel="tag"># Linked_List</a>
+              <a href="/tags/Dummy-Head/" rel="tag"># Dummy_Head</a>
+              <a href="/tags/Recursion/" rel="tag"># Recursion</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/20/Day02-Array-Part02/" rel="prev" title="Day02 Array Part02">
+      <i class="fa fa-chevron-left"></i> Day02 Array Part02
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#203-Remove-Linked-List-Elements"><span class="nav-number">1.</span> <span class="nav-text">203. Remove Linked List Elements</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">1.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">1.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Normal"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Normal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Dummy-Head"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.Dummy_Head</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#707-Design-Linked-List"><span class="nav-number">2.</span> <span class="nav-text">707. Design Linked List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-1"><span class="nav-number">2.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-number">2.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Dummy-Head"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.Dummy_Head</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Dummy-Head-But-More-Concise"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. Dummy_Head_But_More_Concise</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#206-Reverse-Linked-List"><span class="nav-number">3.</span> <span class="nav-text">206. Reverse Linked List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-2"><span class="nav-number">3.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Soulution"><span class="nav-number">3.2.</span> <span class="nav-text">Soulution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Two-Pointer"><span class="nav-number">3.2.1.</span> <span class="nav-text">1.Two_Pointer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Recursion"><span class="nav-number">3.2.2.</span> <span class="nav-text">2. Recursion</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhao Yiwei"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhao Yiwei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhaoYiwei0311" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoYiwei0311" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaoyiwei0311@gmail.com" title="E-Mail → mailto:zhaoyiwei0311@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhao Yiwei</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">21k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">19 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
