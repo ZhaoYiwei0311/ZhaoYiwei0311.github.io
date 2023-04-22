@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="24. Swap Nodes in PairsIntroGiven a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list’s nodes (i.e., only nodes themse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day04 Linked List Part02">
+<meta property="og:url" content="http://example.com/2023/04/23/Day04-Linked-List-Part02/index.html">
+<meta property="og:site_name" content="My_Study_Blog">
+<meta property="og:description" content="24. Swap Nodes in PairsIntroGiven a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list’s nodes (i.e., only nodes themse">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.postimg.cc/Y9F840xQ/Day04-Linked-List-Part02-01.jpg">
+<meta property="article:published_time" content="2023-04-22T17:34:00.000Z">
+<meta property="article:modified_time" content="2023-04-22T17:35:15.195Z">
+<meta property="article:author" content="Zhao Yiwei">
+<meta property="article:tag" content="Two_Pointer">
+<meta property="article:tag" content="Linked_List">
+<meta property="article:tag" content="Dummy_Head">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.postimg.cc/Y9F840xQ/Day04-Linked-List-Part02-01.jpg">
+
+<link rel="canonical" href="http://example.com/2023/04/23/Day04-Linked-List-Part02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Day04 Linked List Part02 | My_Study_Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">My_Study_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/23/Day04-Linked-List-Part02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day04 Linked List Part02
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-04-23 01:34:00 / Modified: 01:35:15" itemprop="dateCreated datePublished" datetime="2023-04-23T01:34:00+08:00">2023-04-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="24-Swap-Nodes-in-Pairs"><a href="#24-Swap-Nodes-in-Pairs" class="headerlink" title="24. Swap Nodes in Pairs"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/swap-nodes-in-pairs/">24. Swap Nodes in Pairs</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list’s nodes (i.e., only nodes themselves may be changed.)</p>
+<span id="more"></span>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Dummy-Head"><a href="#1-Dummy-Head" class="headerlink" title="1.Dummy_Head"></a>1.Dummy_Head</h4><p>Dummy head is quite useful since it simplifies the manipulation of the very first head node.</p>
+<p>Also, the sequence of next declaration and the utilization of  helper node are key points in this question</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Dummy Head</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">swapPairs</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">    <span class="comment">// A dummy head is still needed, and its next is the head</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">dummy</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(-<span class="number">1</span>, head);</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">cur</span> <span class="operator">=</span> dummy;</span><br><span class="line">    <span class="comment">//      0       1       2       3       4</span></span><br><span class="line">    <span class="comment">//      c       c.n     c.n.n</span></span><br><span class="line">    <span class="comment">//      0       2       1       3       4</span></span><br><span class="line">    <span class="comment">//                      c       c.n     c.n.n</span></span><br><span class="line">    <span class="keyword">while</span> (cur.next != <span class="literal">null</span> &amp;&amp; cur.next.next != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">// Here we do not need to judge if cur is null because we have set the dummy as cur deliberately</span></span><br><span class="line">        <span class="comment">// In order to manipulate 1 and 2 node, we must get cur.next and cur.next.next</span></span><br><span class="line">        <span class="comment">// , which is the reason why they must not be null if the loop continues</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Once we have swapped 1 and 2, it is not possible to get 3 through 2,</span></span><br><span class="line">        <span class="comment">// so we need a helper here</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">temp3</span> <span class="operator">=</span> cur.next.next.next;</span><br><span class="line">        <span class="comment">// As the same, once we connect 0 with 2, it is also not possible to get 1,</span></span><br><span class="line">        <span class="comment">// so we need another helper here</span></span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">temp1</span> <span class="operator">=</span> cur.next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// start the swap and sequence is important</span></span><br><span class="line">        <span class="comment">//      0       1       2       3       4</span></span><br><span class="line">        <span class="comment">//      c       c.n     c.n.n</span></span><br><span class="line">        <span class="comment">//      0       1       2       3       4</span></span><br><span class="line">        <span class="comment">//      c       t1      c.n</span></span><br><span class="line">        <span class="comment">//      0       1       2       3       4</span></span><br><span class="line">        <span class="comment">//      c       c.n.n   c.n     t3</span></span><br><span class="line">        <span class="comment">//      0       2       1       3       4</span></span><br><span class="line">        <span class="comment">//      c       c.n     c.n.n</span></span><br><span class="line">        <span class="comment">//      0       2       1       3       4</span></span><br><span class="line">        <span class="comment">//                      c       c.n     c.n.n</span></span><br><span class="line">        cur.next = cur.next.next;</span><br><span class="line">        cur.next.next = temp1;</span><br><span class="line">        cur.next.next.next = temp3;</span><br><span class="line">        cur = cur.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dummy.next; <span class="comment">// It is still dummy&#x27;s next to be returned</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="19-Remove-Nth-Node-From-End-of-List"><a href="#19-Remove-Nth-Node-From-End-of-List" class="headerlink" title="19. Remove Nth Node From End of List"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">19. Remove Nth Node From End of List</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Given the head of a linked list, remove the nth node from the end of the list and return its head.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Two-Pointer-Dummy-Head"><a href="#1-Two-Pointer-Dummy-Head" class="headerlink" title="1.Two_Pointer + Dummy_Head"></a>1.Two_Pointer + Dummy_Head</h4><p>Two pointer can be use used to get the Nth node from end in one loop.</p>
+<p>Suppose we are going to get the 2nd node from end, which is 4 in the example</p>
+<ol>
+<li>We are going to move fast pointer first</li>
+<li>At step 3, when fast pointer has moved 2 steps afterwards, we are going to set the slow pointer. From now on, we will move both pointers simultaneously.</li>
+<li>Fast pointer points to null at step 6 and our iteration stops. We can see that slow pointer now points to the node we want</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="center">Step</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">null</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">f</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"></td>
+<td align="center">f</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">s</td>
+<td align="center"></td>
+<td align="center">f</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center"></td>
+<td align="center">f</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center"></td>
+<td align="center">f</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center"></td>
+<td align="center">f</td>
+</tr>
+</tbody></table>
+<p>Therefore, two pointer is  a useful skill to get the Nth node from end in one loop.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Dummy Head + Two Pointer</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> head</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> n</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">removeNthFromEnd</span><span class="params">(ListNode head, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">dummy</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ListNode</span>(-<span class="number">1</span>, head); <span class="comment">// </span></span><br><span class="line">    <span class="comment">// Suppose n = 2, which means we are going to delete 3 Node</span></span><br><span class="line">    <span class="comment">//      0       1       2       3       4</span></span><br><span class="line">    <span class="comment">//                      c       c.n     c.n.n</span></span><br><span class="line">    <span class="comment">// We must make sure that cur points to the previous node 2 so that we can manipulate node 3</span></span><br><span class="line">    <span class="comment">// This means the slow pointer adopted from the two-pointer skill to get the Nth node from end in one loop should point to the node before, so here should be some adjustment.</span></span><br><span class="line">    <span class="comment">// We can adjust the fast pointer to let it move one more step before moving both pointers</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> dummy;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> dummy;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n + <span class="number">1</span>; i++) &#123; <span class="comment">// We let fast pointer move (n + 1) steps alone</span></span><br><span class="line">        fast = fast.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">null</span>) &#123; <span class="comment">// We move both pointers until fast points to null</span></span><br><span class="line">        fast = fast.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Now it should be like this</span></span><br><span class="line">    <span class="comment">//      0       1       2       3       4       null</span></span><br><span class="line">    <span class="comment">//                      s                       f</span></span><br><span class="line">    slow.next = slow.next.next;</span><br><span class="line">    <span class="keyword">return</span> dummy.next; <span class="comment">// still return dummy.next</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="02-07-Intersection-of-Two-Linked-Lists-LCCI"><a href="#02-07-Intersection-of-Two-Linked-Lists-LCCI" class="headerlink" title="02.07. Intersection of Two Linked Lists LCCI"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/">02.07. Intersection of Two Linked Lists LCCI</a></h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>Given two (singly) linked lists, determine if the two lists intersect. Return the inter­secting node. Note that the intersection is defined based on reference, not value. That is, if the kth node of the first linked list is the exact same node (by reference) as the jth node of the second linked list, then they are intersecting.</p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Two-Pointer"><a href="#1-Two-Pointer" class="headerlink" title="1.Two_Pointer"></a>1.Two_Pointer</h4><p>The key point of this question is to understand the basic principle that judgment of intersection only starts once two lists have the relatively same length from end. We can deduce that by drawling two lists within right alignment.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Two Pointer</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> &#123;</span><br><span class="line">    <span class="comment">// Suppose two lists below</span></span><br><span class="line">    <span class="comment">// A    1       2       3       4       5</span></span><br><span class="line">    <span class="comment">// B    2       4       5</span></span><br><span class="line">    <span class="comment">// Apparently, Node 4 is the one to be returned, but how?</span></span><br><span class="line">    <span class="comment">// There is a rule that if there is an intersection, the two lists will always meet in the end</span></span><br><span class="line">    <span class="comment">// and the length of sub lists after intersection is the same</span></span><br><span class="line">    <span class="comment">// We can try to show both lists in right alignment</span></span><br><span class="line">    <span class="comment">// A    1       2       3       4       5</span></span><br><span class="line">    <span class="comment">// B                    2       4       5</span></span><br><span class="line">    <span class="comment">// We can know that Node 1 to Node 2 from A list is useless,</span></span><br><span class="line">    <span class="comment">// because intersection can only start when two sub lists are of the same length.</span></span><br><span class="line">    <span class="comment">// So we can skip them these we know the length difference of lists, which is 2</span></span><br><span class="line">    <span class="comment">// A    1       2       3       4       5</span></span><br><span class="line">    <span class="comment">//                      cA</span></span><br><span class="line">    <span class="comment">// B                    2       4       5</span></span><br><span class="line">    <span class="comment">//                      cB</span></span><br><span class="line">    <span class="comment">// We make two pointers then at the relatively same point from end</span></span><br><span class="line">    <span class="comment">// then we can start move both pointers simultaneously until we find the intersected node</span></span><br><span class="line">    <span class="comment">// A    1       2       3       4       5</span></span><br><span class="line">    <span class="comment">//                              cA</span></span><br><span class="line">    <span class="comment">// B                    2       4       5</span></span><br><span class="line">    <span class="comment">//                              cB</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">curA</span> <span class="operator">=</span> headA;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">curB</span> <span class="operator">=</span> headB;</span><br><span class="line">    <span class="comment">// We must know the length difference</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">lenA</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">lenB</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (curA != <span class="literal">null</span>) &#123;</span><br><span class="line">        lenA++;</span><br><span class="line">        curA = curA.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (curB != <span class="literal">null</span>) &#123;</span><br><span class="line">        lenB++;</span><br><span class="line">        curB = curB.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// get the length difference</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">diff</span> <span class="operator">=</span> Math.abs(lenA - lenB);</span><br><span class="line">    <span class="comment">// reset</span></span><br><span class="line">    curA = headA;</span><br><span class="line">    curB = headB;</span><br><span class="line">    <span class="comment">// By default, list A should be the one longer, and we can skip some nodes in it,</span></span><br><span class="line">    <span class="comment">// but this is not always the case, so there is a swap to make sure our assume work</span></span><br><span class="line">    <span class="keyword">if</span> (lenA &lt; lenB) &#123;</span><br><span class="line">        curA = headB;</span><br><span class="line">        curB = headA;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (diff-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        curA = curA.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (curA != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (curA == curB) &#123;</span><br><span class="line">            <span class="keyword">return</span> curA;</span><br><span class="line">        &#125;</span><br><span class="line">        curA = curA.next;</span><br><span class="line">        curB = curB.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> curA;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="142-Linked-List-Cycle-II"><a href="#142-Linked-List-Cycle-II" class="headerlink" title="142. Linked List Cycle II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/">142. Linked List Cycle II</a></h2><h3 id="Intro-3"><a href="#Intro-3" class="headerlink" title="Intro"></a>Intro</h3><p>Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.</p>
+<p>There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail’s next pointer is connected to (0-indexed). It is -1 if there is no cycle. Note that pos is not passed as a parameter.</p>
+<p>Do not modify the linked list.</p>
+<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Two-Pointer-1"><a href="#1-Two-Pointer-1" class="headerlink" title="1.Two_Pointer"></a>1.Two_Pointer</h4><p>Two points for this question</p>
+<ol>
+<li><p>How can we know if there is a cycle in the list?</p>
+<p>We can know that by moving two pointers, one moves two steps once and the other one one step once.</p>
+<p>If there is no cycle, the faster one will point to null in advance.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Step</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">null</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">s|f</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center">f</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center"></td>
+<td align="center">f</td>
+</tr>
+</tbody></table>
+<p>If there is a cycle, the two pointers will meet.</p>
+<p>Suppose the node after 3 is node 1.</p>
+<table>
+<thead>
+<tr>
+<th align="center">Step</th>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">s|f</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center"></td>
+<td align="center">s</td>
+<td align="center">f</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"></td>
+<td align="center">f</td>
+<td align="center">s</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">s|f</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>How can we know the entrance of cycle?</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/R6MwyMy0"><img src="https://i.postimg.cc/Y9F840xQ/Day04-Linked-List-Part02-01.jpg" alt="Day04-Linked-List-Part02-01.jpg"></a></p>
+<p>Suppose x as the distance from start to entrance.</p>
+<p>Suppose y as the distance from entrance to the point where both pointers meet, actually it is the distance slow pointer has move after it enters the circle.</p>
+<p>Suppose z as the distance from the point met to entrance.</p>
+<p>What clues can we get then?</p>
+<ol>
+<li><p>The whole distance of slow is x + y</p>
+</li>
+<li><p>The whole distance of cycle is y + z</p>
+</li>
+<li><p>The fast can have already moved n cycles, so the distance of fast is x + y + n * (y + z)</p>
+</li>
+<li><p>The speed of slow is 1 and the speed of fast is 2, so there is an equation: </p>
+<p>​		2 * (x + y) &#x3D; x + y + n * (y + z)</p>
+<p>​		x  &#x3D; n * (y + z) - z</p>
+</li>
+<li><p>n is always &gt;&#x3D; 1 and is not quite important, so we can just combine it with some (n - 1) factor</p>
+<p>​		x  &#x3D; (n - 1) * (y + z) + z</p>
+</li>
+<li><p>Since n is not important, we can actually suppose it be 1 and what we get is</p>
+<p>​		x  &#x3D; z</p>
+<p>which means we can conclude that distance from start to entrance &#x3D;&#x3D; the distance from the point met to entrance</p>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Two Pointer</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">detectCycle</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">    <span class="comment">// Since there might be a cycle now, we can not rely on dummy head</span></span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">fast</span> <span class="operator">=</span> head;</span><br><span class="line">    <span class="type">ListNode</span> <span class="variable">slow</span> <span class="operator">=</span> head;</span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">null</span> &amp;&amp; fast.next != <span class="literal">null</span>) &#123; <span class="comment">// we must make sure that fast.next is also not null because there is no dummy head to simplify the manipulation of the very first head node.</span></span><br><span class="line">        <span class="comment">// If it is the case of [1], we will meet null pointer when we move fast for two steps</span></span><br><span class="line">        fast = fast.next.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">        <span class="keyword">if</span> (fast == slow) &#123; <span class="comment">// two pointers have met</span></span><br><span class="line">            <span class="comment">// reset slow to head</span></span><br><span class="line">            slow = head;</span><br><span class="line">            <span class="comment">// and move both pointers one step every time</span></span><br><span class="line">            <span class="comment">// they will meet at entrance</span></span><br><span class="line">            <span class="keyword">while</span> (slow != fast) &#123;</span><br><span class="line">                slow = slow.next;</span><br><span class="line">                fast = fast.next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> slow;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Two-Pointer/" rel="tag"># Two_Pointer</a>
+              <a href="/tags/Linked-List/" rel="tag"># Linked_List</a>
+              <a href="/tags/Dummy-Head/" rel="tag"># Dummy_Head</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/21/Day03-Linked-List-Part01/" rel="prev" title="Day03 Linked List Part01">
+      <i class="fa fa-chevron-left"></i> Day03 Linked List Part01
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#24-Swap-Nodes-in-Pairs"><span class="nav-number">1.</span> <span class="nav-text">24. Swap Nodes in Pairs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">1.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">1.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Dummy-Head"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Dummy_Head</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-Remove-Nth-Node-From-End-of-List"><span class="nav-number">2.</span> <span class="nav-text">19. Remove Nth Node From End of List</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-1"><span class="nav-number">2.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-number">2.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Two-Pointer-Dummy-Head"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.Two_Pointer + Dummy_Head</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-07-Intersection-of-Two-Linked-Lists-LCCI"><span class="nav-number">3.</span> <span class="nav-text">02.07. Intersection of Two Linked Lists LCCI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-2"><span class="nav-number">3.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2"><span class="nav-number">3.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Two-Pointer"><span class="nav-number">3.2.1.</span> <span class="nav-text">1.Two_Pointer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#142-Linked-List-Cycle-II"><span class="nav-number">4.</span> <span class="nav-text">142. Linked List Cycle II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-3"><span class="nav-number">4.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-3"><span class="nav-number">4.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Two-Pointer-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">1.Two_Pointer</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhao Yiwei"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhao Yiwei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhaoYiwei0311" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoYiwei0311" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaoyiwei0311@gmail.com" title="E-Mail → mailto:zhaoyiwei0311@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhao Yiwei</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">28k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">25 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
