@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="454. 4Sum IIIntroGiven four integer arrays nums1, nums2, nums3, and nums4 all of length n, return the number of tuples (i, j, k, l) such that:  0 &lt;&#x3D; i, j, k, l &lt; n nums1[i] + nums2[j] + num">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day07 Hash Table Part02">
+<meta property="og:url" content="http://example.com/2023/04/25/Day07-Hash-Table-Part02/index.html">
+<meta property="og:site_name" content="My_Study_Blog">
+<meta property="og:description" content="454. 4Sum IIIntroGiven four integer arrays nums1, nums2, nums3, and nums4 all of length n, return the number of tuples (i, j, k, l) such that:  0 &lt;&#x3D; i, j, k, l &lt; n nums1[i] + nums2[j] + num">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-25T14:16:12.000Z">
+<meta property="article:modified_time" content="2023-04-25T14:17:31.935Z">
+<meta property="article:author" content="Zhao Yiwei">
+<meta property="article:tag" content="Two_Pointer">
+<meta property="article:tag" content="Hash_Table">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/04/25/Day07-Hash-Table-Part02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Day07 Hash Table Part02 | My_Study_Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">My_Study_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/25/Day07-Hash-Table-Part02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day07 Hash Table Part02
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-04-25 22:16:12 / Modified: 22:17:31" itemprop="dateCreated datePublished" datetime="2023-04-25T22:16:12+08:00">2023-04-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>6.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="454-4Sum-II"><a href="#454-4Sum-II" class="headerlink" title="454. 4Sum II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum-ii/">454. 4Sum II</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given four integer arrays nums1, nums2, nums3, and nums4 all of length n, return the number of tuples (i, j, k, l) such that:</p>
+<ul>
+<li>0 &lt;&#x3D; i, j, k, l &lt; n</li>
+<li>nums1[i] + nums2[j] + nums3[k] + nums4[l] &#x3D;&#x3D; 0<span id="more"></span></li>
+</ul>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Hash-Table-Divide-And-Conquer"><a href="#1-Hash-Table-Divide-And-Conquer" class="headerlink" title="1.Hash_Table + Divide_And_Conquer"></a>1.Hash_Table + Divide_And_Conquer</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Hash Table + Divide And Conquer</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fourSumCount</span><span class="params">(<span class="type">int</span>[] nums1, <span class="type">int</span>[] nums2, <span class="type">int</span>[] nums3, <span class="type">int</span>[] nums4)</span> &#123;</span><br><span class="line">    <span class="comment">// We do not to care about repetition because all numbers have different indexes</span></span><br><span class="line">    <span class="comment">//  and combination with different position still count.</span></span><br><span class="line">    <span class="comment">// We can divide four arrays into two groups and convert the question into TwoSum1 question</span></span><br><span class="line">    <span class="comment">//  which utilizes hash table.</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> temp;</span><br><span class="line">    <span class="comment">// we store sums from the first two arrays into map</span></span><br><span class="line">    HashMap&lt;Integer, Integer&gt; map1And2 = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i : nums1) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j : nums2) &#123;</span><br><span class="line">            temp = i + j;</span><br><span class="line">            <span class="keyword">if</span> (map1And2.containsKey(temp)) &#123;</span><br><span class="line">                map1And2.put(temp, map1And2.get(temp) + <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                map1And2.put(temp, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// for the rest two arrays, we compare the sum with what we got in the map</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i: nums3) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j : nums4) &#123;</span><br><span class="line">            temp = i + j;</span><br><span class="line">            <span class="keyword">if</span> (map1And2.containsKey(<span class="number">0</span> - temp)) &#123;</span><br><span class="line">                <span class="comment">// we can directly add the value because just as said before,</span></span><br><span class="line">                <span class="comment">// we do not to worry about repetition since combination</span></span><br><span class="line">                <span class="comment">// with different positions still count</span></span><br><span class="line">                ans += map1And2.get(<span class="number">0</span> - temp);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="383-Ransom-Note"><a href="#383-Ransom-Note" class="headerlink" title="383. Ransom Note"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ransom-note/">383. Ransom Note</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Given two strings ransomNote and magazine, return true if ransomNote can be constructed by using the letters from magazine and false otherwise.</p>
+<p>Each letter in magazine can only be used once in ransomNote.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Hash-Table"><a href="#1-Hash-Table" class="headerlink" title="1.Hash_Table"></a>1.Hash_Table</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Hash Table</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">canConstruct</span><span class="params">(String ransomNote, String magazine)</span> &#123;</span><br><span class="line">    <span class="comment">// All are lowercase English letters, so an array rather than map would suffice</span></span><br><span class="line">    <span class="type">int</span>[] record = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; magazine.length(); i++) &#123; <span class="comment">// count all characters from magazine</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">character</span> <span class="operator">=</span> magazine.charAt(i) - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">        record[character]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; ransomNote.length(); i++) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">character</span> <span class="operator">=</span> ransomNote.charAt(i) - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">        record[character]--; <span class="comment">// minus corresponding character</span></span><br><span class="line">        <span class="keyword">if</span> (record[character] &lt; <span class="number">0</span>) &#123; <span class="comment">// if corresponding count is negative, then return false</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="15-3Sum"><a href="#15-3Sum" class="headerlink" title="15. 3Sum"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/">15. 3Sum</a></h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i !&#x3D; j, i !&#x3D; k, and j !&#x3D; k, and nums[i] + nums[j] + nums[k] &#x3D;&#x3D; 0.</p>
+<p>Notice that the solution set must not contain duplicate triplets.</p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Two-Pointer-Quick-Sort"><a href="#1-Two-Pointer-Quick-Sort" class="headerlink" title="1.Two_Pointer + Quick_Sort"></a>1.Two_Pointer + Quick_Sort</h4><p>This question does not require returning index, so we can do a quick sort and find the answer by two pointer.</p>
+<p>The biggest difficulty is to avoid duplication and we can do that by paying attention to the condition of iteration </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Two Pointer + Quick Sort</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">threeSum</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="comment">// We can use two pointer in this question because we do not need to return index</span></span><br><span class="line">    <span class="comment">// Suppose nums = &#123;-1, 0, 1, 2, -1, 4&#125;</span></span><br><span class="line">    <span class="comment">// We must do a quick sort this nums if we want to adopt two pointer</span></span><br><span class="line">    <span class="comment">// So it will become</span></span><br><span class="line">    <span class="comment">//      -1      -1      0       1       2       4</span></span><br><span class="line">    <span class="comment">// Then we do an iteration that starts from -1</span></span><br><span class="line">    <span class="comment">//      -1      -1      0       1       2       4</span></span><br><span class="line">    <span class="comment">//      i</span></span><br><span class="line">    <span class="comment">// And we will import two pointers</span></span><br><span class="line">    <span class="comment">//      -1      -1      0       1       2       4</span></span><br><span class="line">    <span class="comment">//      i       l                               r</span></span><br><span class="line">    <span class="comment">// it seems now three summed are bigger than 0, therefore we can move r</span></span><br><span class="line">    <span class="comment">//      -1      -1      0       1       2       4</span></span><br><span class="line">    <span class="comment">//      i       l                       r</span></span><br><span class="line">    <span class="comment">// bingo, we get one answer &#123;-1, -1, 2&#125; and we shall continue by moving both pointers</span></span><br><span class="line">    <span class="comment">//      -1      -1      0       1       2       4</span></span><br><span class="line">    <span class="comment">//      i               l       r</span></span><br><span class="line">    <span class="comment">// bingo another one. If we keep moving both pointers, l would be bigger than r</span></span><br><span class="line">    <span class="comment">// which means it is time to continue iteration</span></span><br><span class="line">    <span class="comment">//      -1      -1      0       1       2       4</span></span><br><span class="line">    <span class="comment">//              i       l                       r</span></span><br><span class="line">    <span class="comment">// too big until it goes to</span></span><br><span class="line">    <span class="comment">//      -1      -1      0       1       2       4</span></span><br><span class="line">    <span class="comment">//              i       l       r</span></span><br><span class="line">    <span class="comment">// but there comes the issue of duplication, so we must exclude this kind of case</span></span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; ans = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// must sort first</span></span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length - <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// if nums[i] is already bigger than 0, we can break the whole iteration and return ans</span></span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// we must exclude duplicated A.</span></span><br><span class="line">        <span class="comment">// Two codes here</span></span><br><span class="line">        <span class="comment">// 1.nums[i] == nums[i + 1]</span></span><br><span class="line">        <span class="comment">// 2.nums[i] == nums[i - 1]</span></span><br><span class="line">        <span class="comment">// Suppose [-1, -1, 2] and i = 0 right now</span></span><br><span class="line">        <span class="comment">// code 1 is not okay because we will skip it since nums[i] == nums[i + 1]</span></span><br><span class="line">        <span class="comment">// code 2 is okay because there is no element before first -1, so this one counts</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> i + <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="comment">// Here I use two helpers, but actually it is not that necessary</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">tempLeftValue</span> <span class="operator">=</span> nums[left];</span><br><span class="line">            <span class="type">int</span> <span class="variable">tempRightValue</span> <span class="operator">=</span> nums[right];</span><br><span class="line">            <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> nums[i] + tempLeftValue + tempRightValue;</span><br><span class="line">            <span class="keyword">if</span> (sum == <span class="number">0</span>) &#123;</span><br><span class="line">                ans.add(Arrays.asList(nums[i], tempLeftValue, tempRightValue));</span><br><span class="line">                <span class="comment">// exclude duplicated B</span></span><br><span class="line">                <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left + <span class="number">1</span>] == tempLeftValue) &#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;</span><br><span class="line">                left++;</span><br><span class="line">                <span class="comment">// // exclude duplicated C</span></span><br><span class="line">                <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right - <span class="number">1</span>] == tempRightValue) &#123;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">                right--;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="18-4Sum"><a href="#18-4Sum" class="headerlink" title="18. 4Sum"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum/">18. 4Sum</a></h2><h3 id="Intro-3"><a href="#Intro-3" class="headerlink" title="Intro"></a>Intro</h3><p>Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:</p>
+<ul>
+<li><p>0 &lt;&#x3D; a, b, c, d &lt; n</p>
+</li>
+<li><p>a, b, c, and d are distinct.</p>
+</li>
+<li><p>nums[a] + nums[b] + nums[c] + nums[d] &#x3D;&#x3D; target</p>
+</li>
+</ul>
+<p>You may return the answer in any order.</p>
+<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Two-Pointer-Quick-Sort-1"><a href="#1-Two-Pointer-Quick-Sort-1" class="headerlink" title="1.Two_Pointer + Quick_Sort"></a>1.Two_Pointer + Quick_Sort</h4><p>It is quite similar to 15.3Sum.</p>
+<p>First sort and then apply two pointers.</p>
+<p>We can extend this method to even n digits and will result in a declination of complexity from O(N^N) to O(N^(N - 1))</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Two Pointer + Quick Sort</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; <span class="title function_">fourSum</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> target)</span> &#123;</span><br><span class="line">    <span class="comment">// Like ThreeSum15, we can use two pointer</span></span><br><span class="line">    <span class="comment">// And the first step is also sort</span></span><br><span class="line">    Arrays.sort(nums);</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; ans = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length - <span class="number">3</span>; i++) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// return if it is already too big</span></span><br><span class="line">        <span class="comment">// remember it must be positive</span></span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; <span class="number">0</span>  &amp;&amp; nums[i] &gt; target) &#123;</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// exclude duplicate A</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>]) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; nums.length - <span class="number">2</span>; j++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// exclude duplicated B</span></span><br><span class="line">            <span class="keyword">if</span> (j &gt; i + <span class="number">1</span> &amp;&amp; nums[j] == nums[j - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> <span class="variable">left</span> <span class="operator">=</span> j + <span class="number">1</span>;</span><br><span class="line">            <span class="type">int</span> <span class="variable">right</span> <span class="operator">=</span> nums.length - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">                <span class="comment">// there might be overflow, so make it long</span></span><br><span class="line">                <span class="type">long</span> <span class="variable">sum</span> <span class="operator">=</span> nums[i] + nums[j] + nums[left] + nums[right];</span><br><span class="line">                <span class="keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    ans.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));</span><br><span class="line">                    <span class="comment">// exclude duplicated C</span></span><br><span class="line">                    <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[left] == nums[left + <span class="number">1</span>]) &#123;</span><br><span class="line">                        left++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    left++;</span><br><span class="line">                    <span class="comment">// exclude duplicated D</span></span><br><span class="line">                    <span class="keyword">while</span> (left &lt; right &amp;&amp; nums[right] == nums[right - <span class="number">1</span>]) &#123;</span><br><span class="line">                        right--;</span><br><span class="line">                    &#125;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Two-Pointer/" rel="tag"># Two_Pointer</a>
+              <a href="/tags/Hash-Table/" rel="tag"># Hash_Table</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/24/Day06-Hash-Table-Part01/" rel="prev" title="Day06 Hash Table Part01">
+      <i class="fa fa-chevron-left"></i> Day06 Hash Table Part01
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#454-4Sum-II"><span class="nav-number">1.</span> <span class="nav-text">454. 4Sum II</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">1.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">1.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Hash-Table-Divide-And-Conquer"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.Hash_Table + Divide_And_Conquer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#383-Ransom-Note"><span class="nav-number">2.</span> <span class="nav-text">383. Ransom Note</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-1"><span class="nav-number">2.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-number">2.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Hash-Table"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.Hash_Table</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-3Sum"><span class="nav-number">3.</span> <span class="nav-text">15. 3Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-2"><span class="nav-number">3.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2"><span class="nav-number">3.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Two-Pointer-Quick-Sort"><span class="nav-number">3.2.1.</span> <span class="nav-text">1.Two_Pointer + Quick_Sort</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-4Sum"><span class="nav-number">4.</span> <span class="nav-text">18. 4Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-3"><span class="nav-number">4.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-3"><span class="nav-number">4.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Two-Pointer-Quick-Sort-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">1.Two_Pointer + Quick_Sort</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhao Yiwei"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhao Yiwei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhaoYiwei0311" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoYiwei0311" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaoyiwei0311@gmail.com" title="E-Mail → mailto:zhaoyiwei0311@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhao Yiwei</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">38k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">35 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
