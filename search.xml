@@ -146,52 +146,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Day06 Hash Table Part01</title>
-    <url>/2023/04/24/Day06-Hash-Table-Part01/</url>
-    <content><![CDATA[<h2 id="242-Valid-Anagram"><a href="#242-Valid-Anagram" class="headerlink" title="242. Valid Anagram"></a><a href="https://leetcode.cn/problems/valid-anagram/">242. Valid Anagram</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given two strings s and t, return true if t is an anagram of s, and false otherwise.</p>
-<p>An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.</p>
-<span id="more"></span>
-
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Hash-Table"><a href="#1-Hash-Table" class="headerlink" title="1. Hash_Table"></a>1. Hash_Table</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Hash Table</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAnagram</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (s.length() != t.length()) &#123; <span class="comment">// If length is different, that will definitely be false</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] table = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">26</span>]; <span class="comment">// We do not need to create an alphabetical table.</span></span><br><span class="line">                               <span class="comment">// A simulation array would be okay.</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">        table[s.charAt(i) - <span class="string">&#x27;a&#x27;</span>]++; <span class="comment">// for s add</span></span><br><span class="line">        table[t.charAt(i) - <span class="string">&#x27;a&#x27;</span>]--; <span class="comment">// for t minus</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; table.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (table[i] != <span class="number">0</span>) &#123; <span class="comment">// if the value is not 0, it will not be anagram</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="349-Intersection-of-Two-Arrays"><a href="#349-Intersection-of-Two-Arrays" class="headerlink" title="349. Intersection of Two Arrays"></a><a href="https://leetcode.cn/problems/intersection-of-two-arrays/">349. Intersection of Two Arrays</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result in any order.</p>
-<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Set"><a href="#1-Set" class="headerlink" title="1.Set"></a>1.Set</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Set</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] intersection(<span class="type">int</span>[] nums1, <span class="type">int</span>[] nums2) &#123;</span><br><span class="line">    <span class="comment">// Unlike alphabets, we do not know the exact value in the arrays.</span></span><br><span class="line">    <span class="comment">// So we use set instead of array made by ourselves.</span></span><br><span class="line">    HashSet&lt;Integer&gt; containerSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    HashSet&lt;Integer&gt; resultSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums1.length; i++) &#123; <span class="comment">// get all unique value from nums1</span></span><br><span class="line">        containerSet.add(nums1[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums2.length; i++) &#123; <span class="comment">// compare nums2 with containerSet and find intersection</span></span><br><span class="line">        <span class="keyword">if</span> (containerSet.contains(nums2[i])) &#123;</span><br><span class="line">            resultSet.add(nums2[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[resultSet.size()];</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer integer : resultSet) &#123;</span><br><span class="line">        ans[index++] = integer;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="202-Happy-Number"><a href="#202-Happy-Number" class="headerlink" title="202. Happy Number"></a><a href="https://leetcode.cn/problems/happy-number/">202. Happy Number</a></h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>Write an algorithm to determine if a number n is happy.</p>
-<p>A happy number is a number defined by the following process:</p>
-<ul>
-<li>Starting with any positive integer, replace the number by the sum of the squares of its digits.</li>
-<li>Repeat the process until the number equals 1 (where it will stay), or <strong>it loops endlessly in a cycle</strong> which does not include 1.</li>
-<li>Those numbers for which this process ends in 1 are happy.</li>
-</ul>
-<p>Return true if n is a happy number, and false if not.</p>
-<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Set-1"><a href="#1-Set-1" class="headerlink" title="1. Set"></a>1. Set</h4><p>The hardest part might be the algorithm to get the next number.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Set</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isHappy</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// It says that there will be an endless loop if n is not happy.</span></span><br><span class="line">    <span class="comment">// So we can use a set to store numbers that have appeared.</span></span><br><span class="line">    <span class="comment">// Once repetition occurs, return false.</span></span><br><span class="line">    HashSet&lt;Integer&gt; record = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    record.add(n); <span class="comment">// put n into record</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">nextNumber</span> <span class="operator">=</span> getNextNumber(n);</span><br><span class="line">    <span class="keyword">while</span> (nextNumber != <span class="number">1</span>) &#123;</span><br><span class="line">        nextNumber = getNextNumber(nextNumber); <span class="comment">// get the next number</span></span><br><span class="line">        <span class="keyword">if</span> (!record.contains(nextNumber)) &#123; <span class="comment">// if the next number is a new number, we continue</span></span><br><span class="line">            record.add(nextNumber);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// if the next number has appeared, we return false</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getNextNumber</span><span class="params">(<span class="type">int</span> num)</span> &#123; <span class="comment">// always get the rightmost digit</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">digit</span> <span class="operator">=</span> num % <span class="number">10</span>;</span><br><span class="line">        sum += digit * digit;</span><br><span class="line">        num = num / <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="1-Two-Sum"><a href="#1-Two-Sum" class="headerlink" title="1. Two Sum"></a><a href="https://leetcode.cn/problems/two-sum/">1. Two Sum</a></h2><h3 id="Intro-3"><a href="#Intro-3" class="headerlink" title="Intro"></a>Intro</h3><p>Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.</p>
-<p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
-<p>You can return the answer in any order.</p>
-<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Hash-Table-1"><a href="#1-Hash-Table-1" class="headerlink" title="1.Hash_Table"></a>1.Hash_Table</h4><p>We use Hash if there is a requirement to record the element that has appeared. </p>
-<p>We use map because we want to both record the number that has already appeared and the index of it.</p>
-<p>Set is not sufficient because it cannot do the latter.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Hash Table</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] twoSum(<span class="type">int</span>[] nums, <span class="type">int</span> target) &#123;</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="comment">// use map to record target - nums[i]</span></span><br><span class="line">    HashMap&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="comment">// See if there exists a number in the map that equals to nums[i]</span></span><br><span class="line">        <span class="comment">// That is because that we put in the map is target - nums[i]</span></span><br><span class="line">        <span class="keyword">if</span> (map.get(nums[i]) != <span class="literal">null</span>) &#123;</span><br><span class="line">            ans[<span class="number">0</span>] = map.get(nums[i]);</span><br><span class="line">            ans[<span class="number">1</span>] = i;</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// What we put is target - nums[i]</span></span><br><span class="line">        <span class="comment">// What we compare in the iteration is target - nums[i] and nums[i]</span></span><br><span class="line">        <span class="comment">// Also sequence is important here to avoid repetition</span></span><br><span class="line">        <span class="comment">//  1.first compare</span></span><br><span class="line">        <span class="comment">//  2.then put</span></span><br><span class="line">        <span class="comment">// if sequence gets wrong, the answer would be [0,0] in the case where nums [3,2,4]</span></span><br><span class="line">        <span class="comment">//  and target = 6 because we failed to avoid repetition</span></span><br><span class="line">        map.put(target - nums[i], i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>Algorithm</category>
-      </categories>
-      <tags>
-        <tag>Hash_Table</tag>
-        <tag>Set</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Day04 Linked List Part02</title>
     <url>/2023/04/23/Day04-Linked-List-Part02/</url>
     <content><![CDATA[<h2 id="24-Swap-Nodes-in-Pairs"><a href="#24-Swap-Nodes-in-Pairs" class="headerlink" title="24. Swap Nodes in Pairs"></a><a href="https://leetcode.cn/problems/swap-nodes-in-pairs/">24. Swap Nodes in Pairs</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list’s nodes (i.e., only nodes themselves may be changed.)</p>
@@ -455,6 +409,52 @@
       </tags>
   </entry>
   <entry>
+    <title>Day06 Hash Table Part01</title>
+    <url>/2023/04/24/Day06-Hash-Table-Part01/</url>
+    <content><![CDATA[<h2 id="242-Valid-Anagram"><a href="#242-Valid-Anagram" class="headerlink" title="242. Valid Anagram"></a><a href="https://leetcode.cn/problems/valid-anagram/">242. Valid Anagram</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given two strings s and t, return true if t is an anagram of s, and false otherwise.</p>
+<p>An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.</p>
+<span id="more"></span>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Hash-Table"><a href="#1-Hash-Table" class="headerlink" title="1. Hash_Table"></a>1. Hash_Table</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Hash Table</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAnagram</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (s.length() != t.length()) &#123; <span class="comment">// If length is different, that will definitely be false</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] table = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">26</span>]; <span class="comment">// We do not need to create an alphabetical table.</span></span><br><span class="line">                               <span class="comment">// A simulation array would be okay.</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; s.length(); i++) &#123;</span><br><span class="line">        table[s.charAt(i) - <span class="string">&#x27;a&#x27;</span>]++; <span class="comment">// for s add</span></span><br><span class="line">        table[t.charAt(i) - <span class="string">&#x27;a&#x27;</span>]--; <span class="comment">// for t minus</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; table.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (table[i] != <span class="number">0</span>) &#123; <span class="comment">// if the value is not 0, it will not be anagram</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="349-Intersection-of-Two-Arrays"><a href="#349-Intersection-of-Two-Arrays" class="headerlink" title="349. Intersection of Two Arrays"></a><a href="https://leetcode.cn/problems/intersection-of-two-arrays/">349. Intersection of Two Arrays</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result in any order.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Set"><a href="#1-Set" class="headerlink" title="1.Set"></a>1.Set</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Set</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] intersection(<span class="type">int</span>[] nums1, <span class="type">int</span>[] nums2) &#123;</span><br><span class="line">    <span class="comment">// Unlike alphabets, we do not know the exact value in the arrays.</span></span><br><span class="line">    <span class="comment">// So we use set instead of array made by ourselves.</span></span><br><span class="line">    HashSet&lt;Integer&gt; containerSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    HashSet&lt;Integer&gt; resultSet = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums1.length; i++) &#123; <span class="comment">// get all unique value from nums1</span></span><br><span class="line">        containerSet.add(nums1[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums2.length; i++) &#123; <span class="comment">// compare nums2 with containerSet and find intersection</span></span><br><span class="line">        <span class="keyword">if</span> (containerSet.contains(nums2[i])) &#123;</span><br><span class="line">            resultSet.add(nums2[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[resultSet.size()];</span><br><span class="line">    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer integer : resultSet) &#123;</span><br><span class="line">        ans[index++] = integer;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="202-Happy-Number"><a href="#202-Happy-Number" class="headerlink" title="202. Happy Number"></a><a href="https://leetcode.cn/problems/happy-number/">202. Happy Number</a></h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>Write an algorithm to determine if a number n is happy.</p>
+<p>A happy number is a number defined by the following process:</p>
+<ul>
+<li>Starting with any positive integer, replace the number by the sum of the squares of its digits.</li>
+<li>Repeat the process until the number equals 1 (where it will stay), or <strong>it loops endlessly in a cycle</strong> which does not include 1.</li>
+<li>Those numbers for which this process ends in 1 are happy.</li>
+</ul>
+<p>Return true if n is a happy number, and false if not.</p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Set-1"><a href="#1-Set-1" class="headerlink" title="1. Set"></a>1. Set</h4><p>The hardest part might be the algorithm to get the next number.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Set</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isHappy</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// It says that there will be an endless loop if n is not happy.</span></span><br><span class="line">    <span class="comment">// So we can use a set to store numbers that have appeared.</span></span><br><span class="line">    <span class="comment">// Once repetition occurs, return false.</span></span><br><span class="line">    HashSet&lt;Integer&gt; record = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">    record.add(n); <span class="comment">// put n into record</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">nextNumber</span> <span class="operator">=</span> getNextNumber(n);</span><br><span class="line">    <span class="keyword">while</span> (nextNumber != <span class="number">1</span>) &#123;</span><br><span class="line">        nextNumber = getNextNumber(nextNumber); <span class="comment">// get the next number</span></span><br><span class="line">        <span class="keyword">if</span> (!record.contains(nextNumber)) &#123; <span class="comment">// if the next number is a new number, we continue</span></span><br><span class="line">            record.add(nextNumber);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// if the next number has appeared, we return false</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getNextNumber</span><span class="params">(<span class="type">int</span> num)</span> &#123; <span class="comment">// always get the rightmost digit</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (num &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">digit</span> <span class="operator">=</span> num % <span class="number">10</span>;</span><br><span class="line">        sum += digit * digit;</span><br><span class="line">        num = num / <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-Two-Sum"><a href="#1-Two-Sum" class="headerlink" title="1. Two Sum"></a><a href="https://leetcode.cn/problems/two-sum/">1. Two Sum</a></h2><h3 id="Intro-3"><a href="#Intro-3" class="headerlink" title="Intro"></a>Intro</h3><p>Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.</p>
+<p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
+<p>You can return the answer in any order.</p>
+<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Hash-Table-1"><a href="#1-Hash-Table-1" class="headerlink" title="1.Hash_Table"></a>1.Hash_Table</h4><p>We use Hash if there is a requirement to record the element that has appeared. </p>
+<p>We use map because we want to both record the number that has already appeared and the index of it.</p>
+<p>Set is not sufficient because it cannot do the latter.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Hash Table</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] twoSum(<span class="type">int</span>[] nums, <span class="type">int</span> target) &#123;</span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    <span class="comment">// use map to record target - nums[i]</span></span><br><span class="line">    HashMap&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="comment">// See if there exists a number in the map that equals to nums[i]</span></span><br><span class="line">        <span class="comment">// That is because that we put in the map is target - nums[i]</span></span><br><span class="line">        <span class="keyword">if</span> (map.get(nums[i]) != <span class="literal">null</span>) &#123;</span><br><span class="line">            ans[<span class="number">0</span>] = map.get(nums[i]);</span><br><span class="line">            ans[<span class="number">1</span>] = i;</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// What we put is target - nums[i]</span></span><br><span class="line">        <span class="comment">// What we compare in the iteration is target - nums[i] and nums[i]</span></span><br><span class="line">        <span class="comment">// Also sequence is important here to avoid repetition</span></span><br><span class="line">        <span class="comment">//  1.first compare</span></span><br><span class="line">        <span class="comment">//  2.then put</span></span><br><span class="line">        <span class="comment">// if sequence gets wrong, the answer would be [0,0] in the case where nums [3,2,4]</span></span><br><span class="line">        <span class="comment">//  and target = 6 because we failed to avoid repetition</span></span><br><span class="line">        map.put(target - nums[i], i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Hash_Table</tag>
+        <tag>Set</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Day09 String Part02</title>
     <url>/2023/04/27/Day09-String-Part02/</url>
     <content><![CDATA[<h2 id="28-Find-the-Index-of-the-First-Occurrence-in-a-String"><a href="#28-Find-the-Index-of-the-First-Occurrence-in-a-String" class="headerlink" title="28. Find the Index of the First Occurrence in a String"></a><a href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">28. Find the Index of the First Occurrence in a String</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.</p>
@@ -543,61 +543,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Day10 Stack And Queue Part01</title>
-    <url>/2023/04/28/Day10-Stack-And-Queue-Part01/</url>
-    <content><![CDATA[<h2 id="232-Implement-Queue-using-Stacks"><a href="#232-Implement-Queue-using-Stacks" class="headerlink" title="232. Implement Queue using Stacks"></a><a href="https://leetcode.cn/problems/implement-queue-using-stacks/">232. Implement Queue using Stacks</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Implement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).</p>
-<p>Implement the MyQueue class:</p>
-<ul>
-<li><p>void push(int x) Pushes element x to the back of the queue.</p>
-</li>
-<li><p>int pop() Removes the element from the front of the queue and returns it.</p>
-</li>
-<li><p>int peek() Returns the element at the front of the queue.</p>
-</li>
-<li><p>boolean empty() Returns true if the queue is empty, false otherwise.</p>
-</li>
-</ul>
-<p>Notes:</p>
-<ul>
-<li><p>You must use only standard operations of a stack, which means only push to top, peek&#x2F;pop from top, size, and is empty operations are valid.</p>
-</li>
-<li><p>Depending on your language, the stack may not be supported natively. You may simulate a stack using a list or deque (double-ended queue) as long as you use only a stack’s standard operations.</p>
-</li>
-</ul>
-<span id="more"></span>
-
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Normal"><a href="#1-Normal" class="headerlink" title="1.Normal"></a>1.Normal</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyQueue</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Stack&lt;Integer&gt; stackIn;</span><br><span class="line">    Stack&lt;Integer&gt; stackOut;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Suppose we have got 1 2 3 element</span></span><br><span class="line">    <span class="comment">// 1.If it is put, we directly put element in stackIn</span></span><br><span class="line">    <span class="comment">//      stackIn     3 2 1</span></span><br><span class="line">    <span class="comment">//      stackOut    null</span></span><br><span class="line">    <span class="comment">// 2.If we want to pop, there will be two cases</span></span><br><span class="line">    <span class="comment">//      2.1.stackOut is null</span></span><br><span class="line">    <span class="comment">//              stackIn     3 2 1</span></span><br><span class="line">    <span class="comment">//              stackOut    null</span></span><br><span class="line">    <span class="comment">//          2.1.1.We transfer all elements in stackIn to stackOut</span></span><br><span class="line">    <span class="comment">//              stackIn     null</span></span><br><span class="line">    <span class="comment">//              stackOut    1 2 3</span></span><br><span class="line">    <span class="comment">//          2.1.2.We pop element from stackOut and get 1</span></span><br><span class="line">    <span class="comment">//              stackIn     null</span></span><br><span class="line">    <span class="comment">//              stackOut    2 3</span></span><br><span class="line">    <span class="comment">//      2.2.stack out is not null</span></span><br><span class="line">    <span class="comment">//              stackIn     6 5 4</span></span><br><span class="line">    <span class="comment">//              stackOut    2 3</span></span><br><span class="line">    <span class="comment">//          2.2.1.We directly pop element from stackOut and get 2</span></span><br><span class="line">    <span class="comment">//              stackIn     null</span></span><br><span class="line">    <span class="comment">//              stackOut    3</span></span><br><span class="line">    <span class="comment">// 3.If we want to peek, it is similar to pop</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyQueue</span><span class="params">()</span> &#123;</span><br><span class="line">        stackIn = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        stackOut = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        stackIn.push(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">        fillStackOutIfStackOutIsEmpty();</span><br><span class="line">        <span class="keyword">return</span> stackOut.pop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">peek</span><span class="params">()</span> &#123;</span><br><span class="line">        fillStackOutIfStackOutIsEmpty();</span><br><span class="line">        <span class="keyword">return</span> stackOut.peek();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">empty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> stackIn.isEmpty() &amp;&amp; stackOut.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Because we use this function twice, we make it a function</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">fillStackOutIfStackOutIsEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!stackOut.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!stackIn.isEmpty())&#123;</span><br><span class="line">            stackOut.push(stackIn.pop());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="225-Implement-Stack-using-Queues"><a href="#225-Implement-Stack-using-Queues" class="headerlink" title="225. Implement Stack using Queues"></a><a href="https://leetcode.cn/problems/implement-stack-using-queues/">225. Implement Stack using Queues</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Implement a last-in-first-out (LIFO) stack using only two queues. The implemented stack should support all the functions of a normal stack (push, top, pop, and empty).</p>
-<p>Implement the MyStack class:</p>
-<p>- </p>
-<p>  void push(int x) Pushes element x to the top of the stack.</p>
-<p>- </p>
-<p>  int pop() Removes the element on the top of the stack and returns it.</p>
-<p>  -int top() Returns the element on the top of the stack.</p>
-<p>  -boolean empty() Returns true if the stack is empty, false otherwise.</p>
-<p>Notes:</p>
-<p>- </p>
-<p>  You must use only standard operations of a queue, which means that only push to back, peek&#x2F;pop from front, size and is empty operations are valid.</p>
-<p>- </p>
-<p>  Depending on your language, the queue may not be supported natively. You may simulate a queue using a list or deque (double-ended queue) as long as you use only a queue’s standard operations.</p>
-<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Two-Queues"><a href="#1-Two-Queues" class="headerlink" title="1.Two_Queues"></a>1.Two_Queues</h4><p>This algorithm uses two queues and queue2 is used for just back up.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Two Queue</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyStack</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// queue2 is actually a backup queue</span></span><br><span class="line">    Queue&lt;Integer&gt; queue1;</span><br><span class="line">    Queue&lt;Integer&gt; queue2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyStack</span><span class="params">()</span> &#123;</span><br><span class="line">        queue1 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        queue2 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        queue1.offer(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">popped</span> <span class="operator">=</span> popTheLastElementFromQueue1AndPutOthersInQueue2();</span><br><span class="line">        returnQueue2ToQueue1();</span><br><span class="line">        <span class="keyword">return</span> popped;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">top</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">topped</span> <span class="operator">=</span> popTheLastElementFromQueue1AndPutOthersInQueue2();</span><br><span class="line">        queue2.offer(topped);</span><br><span class="line">        returnQueue2ToQueue1();</span><br><span class="line">        <span class="keyword">return</span> topped;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">empty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> queue1.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">returnQueue2ToQueue1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (!queue2.isEmpty()) &#123;</span><br><span class="line">            queue1.offer(queue2.poll());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">popTheLastElementFromQueue1AndPutOthersInQueue2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!queue1.isEmpty()) &#123;</span><br><span class="line">            ans = queue1.poll();</span><br><span class="line">            <span class="keyword">if</span> (!queue1.isEmpty()) &#123;</span><br><span class="line">                queue2.offer(ans);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-One-Queue"><a href="#2-One-Queue" class="headerlink" title="2.One_Queue"></a>2.One_Queue</h4><p>We pop elements and put it back until we come to the the last element.</p>
-<p>The question then comes to how we can know if it is the last element.</p>
-<p>We can do so by declaring a size field.</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * One Queue</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyStack</span> &#123;</span><br><span class="line"></span><br><span class="line">    Queue&lt;Integer&gt; queue;</span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyStack</span><span class="params">()</span> &#123;</span><br><span class="line">        queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>();</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        queue.offer(x);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> popTheLastElementAndPutOtherElementsInQueue();</span><br><span class="line">        size--;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">top</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> popTheLastElementAndPutOtherElementsInQueue();</span><br><span class="line">        size--;</span><br><span class="line">        push(ans);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">empty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> queue.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">popTheLastElementAndPutOtherElementsInQueue</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">tempSize</span> <span class="operator">=</span> size;</span><br><span class="line">        <span class="keyword">while</span> (tempSize != <span class="number">1</span>) &#123;</span><br><span class="line">            queue.offer(queue.poll());</span><br><span class="line">            tempSize--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> queue.poll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Algorithm</category>
-      </categories>
-      <tags>
-        <tag>Stack</tag>
-        <tag>Queue</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Day11 Stack And Queue Part02</title>
     <url>/2023/04/29/Day11-Stack-And-Queue-Part02/</url>
     <content><![CDATA[<h2 id="20-Valid-Parentheses"><a href="#20-Valid-Parentheses" class="headerlink" title="20. Valid Parentheses"></a><a href="https://leetcode.cn/problems/valid-parentheses/">20. Valid Parentheses</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given a string s containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.</p>
@@ -672,7 +617,7 @@
 <h2 id="347-Top-K-Frequent-Elements"><a href="#347-Top-K-Frequent-Elements" class="headerlink" title="347. Top K Frequent Elements"></a><a href="https://leetcode.cn/problems/top-k-frequent-elements/">347. Top K Frequent Elements</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.</p>
 <h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Min-Heap"><a href="#1-Min-Heap" class="headerlink" title="1. Min Heap"></a>1. Min Heap</h4><p>We can rely on the data structure, min heap, to solve this question because this kind of structure is quite good at collecting the extreme number among a lot of numbers through its top, where the extreme number, the smallest one if it is min heap and the biggest one if it is max heap is stored.</p>
 <p><a href="https://postimg.cc/gLKtxdCb"><img src="https://i.postimg.cc/tJKKm4DJ/Day12-Stack-And-Queue-Part03-01.jpg" alt="Day12-Stack-And-Queue-Part03-01.jpg"></a><br>    min heap</p>
-<p>One question which arises is why we use min heap rather than max heap in this question. That is because the min heap stores the element with the lowest frequency on its top and we can pop the top element if the heap’s size overpasses k, which is the size of to-be-returned array, leaving elements with the highest frequency at last.</p>
+<p>One question which arises is why we use min heap rather than max heap in this question. That is because the min heap stores the element with the lowest frequency on its top and we can pop the top element if the heap’s size surpasses k, which is the size of to-be-returned array, leaving elements with the highest frequency at last.</p>
 <p>Another question is how we can realize min heap in java. The answer is priority queue, but we must realize its comparator in this question.</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Min Heap</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) &#123;</span><br><span class="line">    <span class="comment">// 1.We first iterate nums and get the hashmap that records frequency of each element</span></span><br><span class="line">    HashMap&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (map.containsKey(nums[i])) &#123;</span><br><span class="line">            map.put(nums[i], map.get(nums[i]) + <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.put(nums[i], <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2.We rely on min heap in this question and the realization of it in java is</span></span><br><span class="line">    <span class="comment">//  priority queue</span></span><br><span class="line">    PriorityQueue&lt;Map.Entry&lt;Integer, Integer&gt;&gt; priorityQueue = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Map.Entry&lt;Integer, Integer&gt;&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="comment">// It should be a min heap, which means the smallest one should be on the top</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Map.Entry&lt;Integer, Integer&gt; o1, Map.Entry&lt;Integer, Integer&gt; o2)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> o1.getValue() - o2.getValue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 3.We then iterate map and put element in the priorityQueue</span></span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;Integer, Integer&gt; entry : map.entrySet()) &#123;</span><br><span class="line">        priorityQueue.offer(entry);</span><br><span class="line">        <span class="comment">// If the size of priorityQueue is bigger than k, it means we should remove the top element,</span></span><br><span class="line">        <span class="comment">// which is the current number with the lowest frequency</span></span><br><span class="line">        <span class="keyword">if</span> (priorityQueue.size() &gt; k) &#123;</span><br><span class="line">            priorityQueue.poll();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 4.We finally fill the array</span></span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">    <span class="comment">// 5.Although the question does not ask for return the array in desc order, we can do so</span></span><br><span class="line">    <span class="comment">// by iterating from end</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> k - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        ans[i] = priorityQueue.poll().getKey();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
@@ -683,6 +628,355 @@
         <tag>Queue</tag>
         <tag>Monotonic</tag>
         <tag>Heap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Day10 Stack And Queue Part01</title>
+    <url>/2023/04/28/Day10-Stack-And-Queue-Part01/</url>
+    <content><![CDATA[<h2 id="232-Implement-Queue-using-Stacks"><a href="#232-Implement-Queue-using-Stacks" class="headerlink" title="232. Implement Queue using Stacks"></a><a href="https://leetcode.cn/problems/implement-queue-using-stacks/">232. Implement Queue using Stacks</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Implement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).</p>
+<p>Implement the MyQueue class:</p>
+<ul>
+<li><p>void push(int x) Pushes element x to the back of the queue.</p>
+</li>
+<li><p>int pop() Removes the element from the front of the queue and returns it.</p>
+</li>
+<li><p>int peek() Returns the element at the front of the queue.</p>
+</li>
+<li><p>boolean empty() Returns true if the queue is empty, false otherwise.</p>
+</li>
+</ul>
+<p>Notes:</p>
+<ul>
+<li><p>You must use only standard operations of a stack, which means only push to top, peek&#x2F;pop from top, size, and is empty operations are valid.</p>
+</li>
+<li><p>Depending on your language, the stack may not be supported natively. You may simulate a stack using a list or deque (double-ended queue) as long as you use only a stack’s standard operations.</p>
+</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Normal"><a href="#1-Normal" class="headerlink" title="1.Normal"></a>1.Normal</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyQueue</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Stack&lt;Integer&gt; stackIn;</span><br><span class="line">    Stack&lt;Integer&gt; stackOut;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Suppose we have got 1 2 3 element</span></span><br><span class="line">    <span class="comment">// 1.If it is put, we directly put element in stackIn</span></span><br><span class="line">    <span class="comment">//      stackIn     3 2 1</span></span><br><span class="line">    <span class="comment">//      stackOut    null</span></span><br><span class="line">    <span class="comment">// 2.If we want to pop, there will be two cases</span></span><br><span class="line">    <span class="comment">//      2.1.stackOut is null</span></span><br><span class="line">    <span class="comment">//              stackIn     3 2 1</span></span><br><span class="line">    <span class="comment">//              stackOut    null</span></span><br><span class="line">    <span class="comment">//          2.1.1.We transfer all elements in stackIn to stackOut</span></span><br><span class="line">    <span class="comment">//              stackIn     null</span></span><br><span class="line">    <span class="comment">//              stackOut    1 2 3</span></span><br><span class="line">    <span class="comment">//          2.1.2.We pop element from stackOut and get 1</span></span><br><span class="line">    <span class="comment">//              stackIn     null</span></span><br><span class="line">    <span class="comment">//              stackOut    2 3</span></span><br><span class="line">    <span class="comment">//      2.2.stack out is not null</span></span><br><span class="line">    <span class="comment">//              stackIn     6 5 4</span></span><br><span class="line">    <span class="comment">//              stackOut    2 3</span></span><br><span class="line">    <span class="comment">//          2.2.1.We directly pop element from stackOut and get 2</span></span><br><span class="line">    <span class="comment">//              stackIn     null</span></span><br><span class="line">    <span class="comment">//              stackOut    3</span></span><br><span class="line">    <span class="comment">// 3.If we want to peek, it is similar to pop</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyQueue</span><span class="params">()</span> &#123;</span><br><span class="line">        stackIn = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">        stackOut = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        stackIn.push(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">        fillStackOutIfStackOutIsEmpty();</span><br><span class="line">        <span class="keyword">return</span> stackOut.pop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">peek</span><span class="params">()</span> &#123;</span><br><span class="line">        fillStackOutIfStackOutIsEmpty();</span><br><span class="line">        <span class="keyword">return</span> stackOut.peek();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">empty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> stackIn.isEmpty() &amp;&amp; stackOut.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Because we use this function twice, we make it a function</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">fillStackOutIfStackOutIsEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!stackOut.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!stackIn.isEmpty())&#123;</span><br><span class="line">            stackOut.push(stackIn.pop());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="225-Implement-Stack-using-Queues"><a href="#225-Implement-Stack-using-Queues" class="headerlink" title="225. Implement Stack using Queues"></a><a href="https://leetcode.cn/problems/implement-stack-using-queues/">225. Implement Stack using Queues</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Implement a last-in-first-out (LIFO) stack using only two queues. The implemented stack should support all the functions of a normal stack (push, top, pop, and empty).</p>
+<p>Implement the MyStack class:</p>
+<p>- </p>
+<p>  void push(int x) Pushes element x to the top of the stack.</p>
+<p>- </p>
+<p>  int pop() Removes the element on the top of the stack and returns it.</p>
+<p>  -int top() Returns the element on the top of the stack.</p>
+<p>  -boolean empty() Returns true if the stack is empty, false otherwise.</p>
+<p>Notes:</p>
+<p>- </p>
+<p>  You must use only standard operations of a queue, which means that only push to back, peek&#x2F;pop from front, size and is empty operations are valid.</p>
+<p>- </p>
+<p>  Depending on your language, the queue may not be supported natively. You may simulate a queue using a list or deque (double-ended queue) as long as you use only a queue’s standard operations.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Two-Queues"><a href="#1-Two-Queues" class="headerlink" title="1.Two_Queues"></a>1.Two_Queues</h4><p>This algorithm uses two queues and queue2 is used for just back up.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Two Queue</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyStack</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// queue2 is actually a backup queue</span></span><br><span class="line">    Queue&lt;Integer&gt; queue1;</span><br><span class="line">    Queue&lt;Integer&gt; queue2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyStack</span><span class="params">()</span> &#123;</span><br><span class="line">        queue1 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">        queue2 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        queue1.offer(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">popped</span> <span class="operator">=</span> popTheLastElementFromQueue1AndPutOthersInQueue2();</span><br><span class="line">        returnQueue2ToQueue1();</span><br><span class="line">        <span class="keyword">return</span> popped;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">top</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">topped</span> <span class="operator">=</span> popTheLastElementFromQueue1AndPutOthersInQueue2();</span><br><span class="line">        queue2.offer(topped);</span><br><span class="line">        returnQueue2ToQueue1();</span><br><span class="line">        <span class="keyword">return</span> topped;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">empty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> queue1.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">returnQueue2ToQueue1</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">while</span> (!queue2.isEmpty()) &#123;</span><br><span class="line">            queue1.offer(queue2.poll());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">popTheLastElementFromQueue1AndPutOthersInQueue2</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!queue1.isEmpty()) &#123;</span><br><span class="line">            ans = queue1.poll();</span><br><span class="line">            <span class="keyword">if</span> (!queue1.isEmpty()) &#123;</span><br><span class="line">                queue2.offer(ans);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-One-Queue"><a href="#2-One-Queue" class="headerlink" title="2.One_Queue"></a>2.One_Queue</h4><p>We pop elements and put it back until we come to the the last element.</p>
+<p>The question then comes to how we can know if it is the last element.</p>
+<p>We can do so by declaring a size field.</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * One Queue</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyStack</span> &#123;</span><br><span class="line"></span><br><span class="line">    Queue&lt;Integer&gt; queue;</span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyStack</span><span class="params">()</span> &#123;</span><br><span class="line">        queue = <span class="keyword">new</span> <span class="title class_">LinkedList</span>();</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">push</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        queue.offer(x);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">pop</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> popTheLastElementAndPutOtherElementsInQueue();</span><br><span class="line">        size--;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">top</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> popTheLastElementAndPutOtherElementsInQueue();</span><br><span class="line">        size--;</span><br><span class="line">        push(ans);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">empty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> queue.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">popTheLastElementAndPutOtherElementsInQueue</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">tempSize</span> <span class="operator">=</span> size;</span><br><span class="line">        <span class="keyword">while</span> (tempSize != <span class="number">1</span>) &#123;</span><br><span class="line">            queue.offer(queue.poll());</span><br><span class="line">            tempSize--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> queue.poll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Stack</tag>
+        <tag>Queue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Day14 Binary Tree Part01</title>
+    <url>/2023/05/02/Day14-Binary-Tree-Part01/</url>
+    <content><![CDATA[<h2 id="Binary-Tree-Concept"><a href="#Binary-Tree-Concept" class="headerlink" title="Binary Tree Concept"></a>Binary Tree Concept</h2><h3 id="1-Perfect-Binary-Tree-amp-Complete-Binary-Tree"><a href="#1-Perfect-Binary-Tree-amp-Complete-Binary-Tree" class="headerlink" title="1.Perfect Binary Tree &amp; Complete Binary Tree"></a>1.Perfect Binary Tree &amp; Complete Binary Tree</h3><h4 id="1-1-Perfect-Binary-Tree"><a href="#1-1-Perfect-Binary-Tree" class="headerlink" title="1.1.Perfect Binary Tree"></a>1.1.Perfect Binary Tree</h4><p>The degree of its nodes is either 2 or 0(for nodes that are at bottom)</p>
+<p><a href="https://postimg.cc/3k9bpbTH"><img src="https://i.postimg.cc/7LyvFptb/Day-14-Binary-Tree-Part01-01.jpg" alt="Day-14-Binary-Tree-Part01-01.jpg"></a></p>
+<span id="more"></span>
+
+<h4 id="1-2-Complete-Binary-Tree"><a href="#1-2-Complete-Binary-Tree" class="headerlink" title="1.2.Complete Binary Tree"></a>1.2.Complete Binary Tree</h4><p>Except for the bottom layer, all other layers should be filled with nodes in maximum number. And as for the bottom layer, nodes can only be filled in the order from left to right. If there is a node at bottom with its left-sided node empty, this tree would not be complete binary tree.</p>
+<p><a href="https://postimg.cc/rRm5BgH5"><img src="https://i.postimg.cc/T1jQW4qN/Day-14-Binary-Tree-Part01-02.jpg" alt="Day-14-Binary-Tree-Part01-02.jpg"></a></p>
+<h3 id="2-Binary-Search-Tree"><a href="#2-Binary-Search-Tree" class="headerlink" title="2.Binary Search Tree"></a>2.Binary Search Tree</h3><h4 id="2-1-Binary-Search-Tree"><a href="#2-1-Binary-Search-Tree" class="headerlink" title="2.1.Binary Search Tree"></a>2.1.Binary Search Tree</h4><p>Binary search tree is a tree with order.</p>
+<ul>
+<li>If one node has left subtree, then all nodes from this subtree is smaller than this node.</li>
+<li>If one node has right subtree, then all nodes from this subtree is bigger than this node.</li>
+<li>The left subtree and the right subtree of one node is also binary search tree.</li>
+</ul>
+<p><a href="https://postimg.cc/GTRrSSSm"><img src="https://i.postimg.cc/gjXJjCV8/Day-14-Binary-Tree-Part01-03.jpg" alt="Day-14-Binary-Tree-Part01-03.jpg"></a></p>
+<h4 id="2-2-AVL-Tree"><a href="#2-2-AVL-Tree" class="headerlink" title="2.2.AVL Tree"></a>2.2.AVL Tree</h4><p>AVL tree is a special search tree.</p>
+<ul>
+<li>It can be an empty tree</li>
+<li>Or if is not empty, the absolute height difference of the left subtree and the right one from the root should not surpass 1.</li>
+<li>Both its left and right subtree are AVL trees.</li>
+</ul>
+<p><a href="https://postimg.cc/4mZF2hsP"><img src="https://i.postimg.cc/vH6FBWKJ/Day-14-Binary-Tree-Part01-04.jpg" alt="Day-14-Binary-Tree-Part01-04.jpg"></a></p>
+<h3 id="3-The-Implementation-of-Binary-Tree"><a href="#3-The-Implementation-of-Binary-Tree" class="headerlink" title="3.The Implementation of Binary Tree"></a>3.The Implementation of Binary Tree</h3><h4 id="3-1-Linked-List"><a href="#3-1-Linked-List" class="headerlink" title="3.1.Linked List"></a>3.1.Linked List</h4><p>We can implement binary tree through linked list that has fields of left son node and right son node, which is easy to understand.</p>
+<h4 id="3-2-Array"><a href="#3-2-Array" class="headerlink" title="3.2.Array"></a>3.2.Array</h4><p>We can also use array to implement binary tree.</p>
+<p>If the index of the node is i, then its left son has the index of (i * 2 + 1) and its right son (i * 2 + 2)</p>
+<p><a href="https://postimg.cc/5QMYSJc7"><img src="https://i.postimg.cc/C5RGYMcg/Day-14-Binary-Tree-Part01-05.jpg" alt="Day-14-Binary-Tree-Part01-05.jpg"></a></p>
+<h3 id="4-The-Iteration-of-Binary-Tree"><a href="#4-The-Iteration-of-Binary-Tree" class="headerlink" title="4.The Iteration of Binary Tree"></a>4.The Iteration of Binary Tree</h3><h4 id="4-1-DFS"><a href="#4-1-DFS" class="headerlink" title="4.1.DFS"></a>4.1.DFS</h4><p>Understand all three methods by the position of root.</p>
+<h5 id="4-1-1-PreOrder"><a href="#4-1-1-PreOrder" class="headerlink" title="4.1.1.PreOrder"></a>4.1.1.PreOrder</h5><p>Root at head</p>
+<p><a href="https://postimg.cc/2LhzTLdh"><img src="https://i.postimg.cc/fygJzxJ2/Day-14-Binary-Tree-Part01-06.jpg" alt="Day-14-Binary-Tree-Part01-06.jpg"></a></p>
+<h5 id="4-1-2-InOrder"><a href="#4-1-2-InOrder" class="headerlink" title="4.1.2.InOrder"></a>4.1.2.InOrder</h5><p>Root at middle</p>
+<p><a href="https://postimg.cc/mtWZkVRw"><img src="https://i.postimg.cc/pXpm016g/Day-14-Binary-Tree-Part01-07.jpg" alt="Day-14-Binary-Tree-Part01-07.jpg"></a></p>
+<h5 id="4-1-3PostOrder"><a href="#4-1-3PostOrder" class="headerlink" title="4.1.3PostOrder"></a>4.1.3PostOrder</h5><p>Root at end</p>
+<p><a href="https://postimg.cc/xqzT9Br8"><img src="https://i.postimg.cc/v8P1td3r/Day-14-Binary-Tree-Part01-08.jpg" alt="Day-14-Binary-Tree-Part01-08.jpg"></a></p>
+<h4 id="4-2-BFS"><a href="#4-2-BFS" class="headerlink" title="4.2.BFS"></a>4.2.BFS</h4><p>By layer</p>
+<h2 id="144-Binary-Tree-Preorder-Traversal"><a href="#144-Binary-Tree-Preorder-Traversal" class="headerlink" title="144. Binary Tree Preorder Traversal"></a><a href="https://leetcode.cn/problems/binary-tree-preorder-traversal/">144. Binary Tree Preorder Traversal</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary tree, return the preorder traversal of its nodes’ values.</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Recursion"><a href="#1-Recursion" class="headerlink" title="1.Recursion"></a>1.Recursion</h4><p>We can follow three rules while writing recursion</p>
+<ol>
+<li>Confirm the params and returned value of recursion function</li>
+<li>Confirm the end condition, otherwise there might be stack overflow</li>
+<li>Confirm the logic of single layer of recursion</li>
+</ol>
+<p>As for preorder traversal, we can realize three rules</p>
+<ol>
+<li><p>The params should be the current node and the container that stores the result</p>
+<ul>
+<li>void preorder(Treenode root, List<Integer> list)</li>
+</ul>
+</li>
+<li><p>The end condition should be when the current root is null, which means it is time to return</p>
+<ul>
+<li>if (root &#x3D;&#x3D; null) {return}</li>
+</ul>
+</li>
+<li><p>The logic of single layer is to firstly store the root, then do recursion of its left, and at last do recursion of its right</p>
+<ul>
+<li>list.add(root.value);</li>
+<li>preorder(root.left, list);</li>
+<li>preorder(root.right, list);</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">preorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    preorder(root, list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">preorder</span><span class="params">(TreeNode root, List&lt;Integer&gt; list)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    list.add(root.val);</span><br><span class="line">    preorder(root.left, list);</span><br><span class="line">    preorder(root.right, list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Stack"><a href="#2-Stack" class="headerlink" title="2.Stack"></a>2.Stack</h4><p>We can also use a stack to do the iteration rather than recursion</p>
+<p>For example, if a tree is </p>
+<p>​		5</p>
+<p>​	4	6</p>
+<p>1	2</p>
+<p>We use a stack to iterate</p>
+<ol>
+<li>stack: 5 <ul>
+<li>then 5 is popped and added to list</li>
+<li>list: 5</li>
+</ul>
+</li>
+<li>stack: 6<ul>
+<li>We first put the right son of 5 because it is stack and what is pushed first gets popped last</li>
+</ul>
+</li>
+<li>stack: 6 4<ul>
+<li>We then put the left son of 5</li>
+</ul>
+</li>
+<li>stack: 6<ul>
+<li>4 gets popped out and added to list</li>
+<li>list: 5 4</li>
+</ul>
+</li>
+<li>stack: 6 2<ul>
+<li>The right son of 4 gets pushed in</li>
+</ul>
+</li>
+<li>stack: 6 2 1<ul>
+<li>The left son of 4 gets pushed in</li>
+</ul>
+</li>
+<li>stack: 6 2<ul>
+<li>1 gets popped out and added to list</li>
+<li>list: 5 4 1</li>
+</ul>
+</li>
+<li>stack: 6<ul>
+<li>2 gets popped out and added to list</li>
+<li>list: 5 4 1 2</li>
+</ul>
+</li>
+<li>stack: <ul>
+<li>6 gets popped out and added to list</li>
+<li>list: 5 4 1 2 6</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Stack</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">preorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    Deque&lt;TreeNode&gt; stack = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// Put the root in stack so that iteration can begin</span></span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    stack.push(root);</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> stack.pop();</span><br><span class="line">        <span class="comment">// We must pay attention to the order of pushing</span></span><br><span class="line">        <span class="comment">// Since it is preorder, the order would be to root, root.left and root.right</span></span><br><span class="line">        <span class="comment">// But for stack, the popped out element would be the last element pushed</span></span><br><span class="line">        <span class="comment">// So the push order should be opposite to the preorder order, which means</span></span><br><span class="line">        <span class="comment">// we should push right first, then left</span></span><br><span class="line">        list.add(node.val);</span><br><span class="line">        <span class="keyword">if</span> (node.right != <span class="literal">null</span>) &#123;</span><br><span class="line">            stack.push(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (node.left != <span class="literal">null</span>) &#123;</span><br><span class="line">            stack.push(node.left);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="145-Binary-Tree-Postorder-Traversal"><a href="#145-Binary-Tree-Postorder-Traversal" class="headerlink" title="145. Binary Tree Postorder Traversal"></a><a href="https://leetcode.cn/problems/binary-tree-postorder-traversal/">145. Binary Tree Postorder Traversal</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary tree, return the postorder traversal of its nodes’ values.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Recursion-1"><a href="#1-Recursion-1" class="headerlink" title="1.Recursion"></a>1.Recursion</h4><p>As for postorder traversal, we can realize three rules</p>
+<ol>
+<li><p>The params should be the current node and the container that stores the result</p>
+<ul>
+<li>void preorder(Treenode root, List<Integer> list)</li>
+</ul>
+</li>
+<li><p>The end condition should be when the current root is null, which means it is time to return</p>
+<ul>
+<li>if (root &#x3D;&#x3D; null) {return}</li>
+</ul>
+</li>
+<li><p>The logic of single layer is to firstly do recursion of its left, then do recursion of its right, and at last store root’s value</p>
+<ul>
+<li><p>preorder(root.left, list);</p>
+</li>
+<li><p>preorder(root.right, list);</p>
+</li>
+<li><p>list.add(root.value);</p>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">postorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    postorder(root, list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">postorder</span><span class="params">(TreeNode root, List&lt;Integer&gt; list)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    postorder(root.left, list);</span><br><span class="line">    postorder(root.right, list);</span><br><span class="line">    list.add(root.val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Stack-1"><a href="#2-Stack-1" class="headerlink" title="2.Stack"></a>2.Stack</h4><p>Postorder can be modified from preorder since the order of postorder, which is left, right, root, can be achieved by firstly swapping the order of left and right from preorder followed by reversing the result list.</p>
+<p>For example, if a tree is </p>
+<p>​		5</p>
+<p>​	4	6</p>
+<p>1	2</p>
+<p>We use a stack to iterate</p>
+<ol>
+<li><p>stack: 5 </p>
+<ul>
+<li>then 5 is popped and added to list</li>
+<li>list: 5</li>
+</ul>
+</li>
+<li><p>stack: 4</p>
+<ul>
+<li>We first put the left son of 5 because it is stack and what is pushed first gets popped last</li>
+</ul>
+</li>
+<li><p>stack: 4 6</p>
+<ul>
+<li>We then put the right son of 5</li>
+</ul>
+</li>
+<li><p>stack: 4</p>
+<ul>
+<li>6 gets popped out and added to list</li>
+<li>list: 5 6</li>
+</ul>
+</li>
+<li><p>stack: 1</p>
+<ul>
+<li>4 gets popped and added to list</li>
+<li>The left son of 4 gets pushed in</li>
+<li>list: 5 6 4</li>
+</ul>
+</li>
+<li><p>stack: 1 2</p>
+<ul>
+<li>The right son of 4 gets pushed in</li>
+</ul>
+</li>
+<li><p>stack: 1</p>
+<ul>
+<li>2 gets popped out and added to list</li>
+<li>list: 5 6 4 2</li>
+</ul>
+</li>
+<li><p>stack: </p>
+<ul>
+<li>1 gets popped out and added to list</li>
+<li>list: 5 6 4 2 1</li>
+</ul>
+</li>
+<li><p>We finally reverse the list and get what we want</p>
+<ul>
+<li>list: 1 2 4 6 5</li>
+</ul>
+</li>
+</ol>
+<h2 id="94-Binary-Tree-Inorder-Traversal"><a href="#94-Binary-Tree-Inorder-Traversal" class="headerlink" title="94. Binary Tree Inorder Traversal"></a><a href="https://leetcode.cn/problems/binary-tree-inorder-traversal/">94. Binary Tree Inorder Traversal</a></h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary tree, return the inorder traversal of its nodes’ values.</p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Recursion-2"><a href="#1-Recursion-2" class="headerlink" title="1.Recursion"></a>1.Recursion</h4><p>As for inorder traversal, we can realize three rules</p>
+<ol>
+<li><p>The params should be the current node and the container that stores the result</p>
+<ul>
+<li>void preorder(Treenode root, List<Integer> list)</li>
+</ul>
+</li>
+<li><p>The end condition should be when the current root is null, which means it is time to return</p>
+<ul>
+<li>if (root &#x3D;&#x3D; null) {return}</li>
+</ul>
+</li>
+<li><p>The logic of single layer is to firstly do recursion of its left, then store root’s value, and at last do recursion of its right</p>
+<ul>
+<li><p>preorder(root.left, list);</p>
+</li>
+<li><p>list.add(root.value);</p>
+</li>
+<li><p>preorder(root.right, list);</p>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">inorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    inorder(root, list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">inorder</span><span class="params">(TreeNode root, List&lt;Integer&gt; list)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    inorder(root.left, list);</span><br><span class="line">    list.add(root.val);</span><br><span class="line">    inorder(root.right, list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Stack-2"><a href="#2-Stack-2" class="headerlink" title="2.Stack"></a>2.Stack</h4><p>Using stack to iterate tree in inorder is more difficult than previous two orders because the order of visiting each node and the order of dealing with each node is different. When we visit the root, we cannot add it in the result list until we visit the left node at bottom. To solve this problem, we can introduce a cursor that points to the node we visit.</p>
+<p>For example, if a tree is </p>
+<p>​		5</p>
+<p>​	4	6</p>
+<p>1	2</p>
+<p>We use a stack and cursor to iterate</p>
+<ol>
+<li>stack: null<ul>
+<li>cur &#x3D; 5</li>
+</ul>
+</li>
+<li>stack: 5<ul>
+<li>cur &#x3D; 5.left &#x3D; 4</li>
+</ul>
+</li>
+<li>stack: 5 4<ul>
+<li>cur &#x3D; 4.left &#x3D; 1</li>
+</ul>
+</li>
+<li>stack: 5 4 1<ul>
+<li>cur &#x3D; 1.left &#x3D; null</li>
+</ul>
+</li>
+<li>stack: 5 4<ul>
+<li>cur &#x3D; 1.right &#x3D; null</li>
+<li>list: 1</li>
+</ul>
+</li>
+<li>stack: 5<ul>
+<li>cur &#x3D; 4.right &#x3D; 2</li>
+<li>list: 1 4</li>
+</ul>
+</li>
+<li>stack: 5 2<ul>
+<li>cur &#x3D; 2.left &#x3D; null</li>
+</ul>
+</li>
+<li>stack: 5<ul>
+<li>cur &#x3D; 2.right &#x3D; null</li>
+<li>list: 1 4 2</li>
+</ul>
+</li>
+<li>stack: <ul>
+<li>cur &#x3D; 5.right &#x3D; 6</li>
+<li>list: 1 4 2 5</li>
+</ul>
+</li>
+<li>stack: 6<ul>
+<li>cur &#x3D; 6.left &#x3D; null</li>
+</ul>
+</li>
+<li>stack:<ul>
+<li>cur &#x3D; 6.right &#x3D; null</li>
+<li>list: 1 4 2 5 6</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Stack</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">inorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">    Deque&lt;TreeNode&gt; stack = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// We need a cursor to track the node</span></span><br><span class="line">    <span class="type">TreeNode</span> <span class="variable">cur</span> <span class="operator">=</span> root;</span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="literal">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cur != <span class="literal">null</span>) &#123;</span><br><span class="line">            stack.push(cur);</span><br><span class="line">            cur = cur.left;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = stack.pop();</span><br><span class="line">            list.add(cur.val);</span><br><span class="line">            cur = cur.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Recursion</tag>
+        <tag>Stack</tag>
+        <tag>Binary_Tree</tag>
       </tags>
   </entry>
 </search>

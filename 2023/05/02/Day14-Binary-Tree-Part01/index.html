@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Binary Tree Concept1.Perfect Binary Tree &amp; Complete Binary Tree1.1.Perfect Binary TreeThe degree of its nodes is either 2 or 0(for nodes that are at bottom)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day14 Binary Tree Part01">
+<meta property="og:url" content="http://example.com/2023/05/02/Day14-Binary-Tree-Part01/index.html">
+<meta property="og:site_name" content="My_Study_Blog">
+<meta property="og:description" content="Binary Tree Concept1.Perfect Binary Tree &amp; Complete Binary Tree1.1.Perfect Binary TreeThe degree of its nodes is either 2 or 0(for nodes that are at bottom)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.postimg.cc/7LyvFptb/Day-14-Binary-Tree-Part01-01.jpg">
+<meta property="og:image" content="https://i.postimg.cc/T1jQW4qN/Day-14-Binary-Tree-Part01-02.jpg">
+<meta property="og:image" content="https://i.postimg.cc/gjXJjCV8/Day-14-Binary-Tree-Part01-03.jpg">
+<meta property="og:image" content="https://i.postimg.cc/vH6FBWKJ/Day-14-Binary-Tree-Part01-04.jpg">
+<meta property="og:image" content="https://i.postimg.cc/C5RGYMcg/Day-14-Binary-Tree-Part01-05.jpg">
+<meta property="og:image" content="https://i.postimg.cc/fygJzxJ2/Day-14-Binary-Tree-Part01-06.jpg">
+<meta property="og:image" content="https://i.postimg.cc/pXpm016g/Day-14-Binary-Tree-Part01-07.jpg">
+<meta property="og:image" content="https://i.postimg.cc/v8P1td3r/Day-14-Binary-Tree-Part01-08.jpg">
+<meta property="article:published_time" content="2023-05-02T07:37:19.000Z">
+<meta property="article:modified_time" content="2023-05-02T07:39:07.801Z">
+<meta property="article:author" content="Zhao Yiwei">
+<meta property="article:tag" content="Recursion">
+<meta property="article:tag" content="Stack">
+<meta property="article:tag" content="Binary_Tree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.postimg.cc/7LyvFptb/Day-14-Binary-Tree-Part01-01.jpg">
+
+<link rel="canonical" href="http://example.com/2023/05/02/Day14-Binary-Tree-Part01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Day14 Binary Tree Part01 | My_Study_Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">My_Study_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/02/Day14-Binary-Tree-Part01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day14 Binary Tree Part01
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-02 15:37:19 / Modified: 15:39:07" itemprop="dateCreated datePublished" datetime="2023-05-02T15:37:19+08:00">2023-05-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>7.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>7 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Binary-Tree-Concept"><a href="#Binary-Tree-Concept" class="headerlink" title="Binary Tree Concept"></a>Binary Tree Concept</h2><h3 id="1-Perfect-Binary-Tree-amp-Complete-Binary-Tree"><a href="#1-Perfect-Binary-Tree-amp-Complete-Binary-Tree" class="headerlink" title="1.Perfect Binary Tree &amp; Complete Binary Tree"></a>1.Perfect Binary Tree &amp; Complete Binary Tree</h3><h4 id="1-1-Perfect-Binary-Tree"><a href="#1-1-Perfect-Binary-Tree" class="headerlink" title="1.1.Perfect Binary Tree"></a>1.1.Perfect Binary Tree</h4><p>The degree of its nodes is either 2 or 0(for nodes that are at bottom)</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/3k9bpbTH"><img src="https://i.postimg.cc/7LyvFptb/Day-14-Binary-Tree-Part01-01.jpg" alt="Day-14-Binary-Tree-Part01-01.jpg"></a></p>
+<span id="more"></span>
+
+<h4 id="1-2-Complete-Binary-Tree"><a href="#1-2-Complete-Binary-Tree" class="headerlink" title="1.2.Complete Binary Tree"></a>1.2.Complete Binary Tree</h4><p>Except for the bottom layer, all other layers should be filled with nodes in maximum number. And as for the bottom layer, nodes can only be filled in the order from left to right. If there is a node at bottom with its left-sided node empty, this tree would not be complete binary tree.</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/rRm5BgH5"><img src="https://i.postimg.cc/T1jQW4qN/Day-14-Binary-Tree-Part01-02.jpg" alt="Day-14-Binary-Tree-Part01-02.jpg"></a></p>
+<h3 id="2-Binary-Search-Tree"><a href="#2-Binary-Search-Tree" class="headerlink" title="2.Binary Search Tree"></a>2.Binary Search Tree</h3><h4 id="2-1-Binary-Search-Tree"><a href="#2-1-Binary-Search-Tree" class="headerlink" title="2.1.Binary Search Tree"></a>2.1.Binary Search Tree</h4><p>Binary search tree is a tree with order.</p>
+<ul>
+<li>If one node has left subtree, then all nodes from this subtree is smaller than this node.</li>
+<li>If one node has right subtree, then all nodes from this subtree is bigger than this node.</li>
+<li>The left subtree and the right subtree of one node is also binary search tree.</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/GTRrSSSm"><img src="https://i.postimg.cc/gjXJjCV8/Day-14-Binary-Tree-Part01-03.jpg" alt="Day-14-Binary-Tree-Part01-03.jpg"></a></p>
+<h4 id="2-2-AVL-Tree"><a href="#2-2-AVL-Tree" class="headerlink" title="2.2.AVL Tree"></a>2.2.AVL Tree</h4><p>AVL tree is a special search tree.</p>
+<ul>
+<li>It can be an empty tree</li>
+<li>Or if is not empty, the absolute height difference of the left subtree and the right one from the root should not surpass 1.</li>
+<li>Both its left and right subtree are AVL trees.</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/4mZF2hsP"><img src="https://i.postimg.cc/vH6FBWKJ/Day-14-Binary-Tree-Part01-04.jpg" alt="Day-14-Binary-Tree-Part01-04.jpg"></a></p>
+<h3 id="3-The-Implementation-of-Binary-Tree"><a href="#3-The-Implementation-of-Binary-Tree" class="headerlink" title="3.The Implementation of Binary Tree"></a>3.The Implementation of Binary Tree</h3><h4 id="3-1-Linked-List"><a href="#3-1-Linked-List" class="headerlink" title="3.1.Linked List"></a>3.1.Linked List</h4><p>We can implement binary tree through linked list that has fields of left son node and right son node, which is easy to understand.</p>
+<h4 id="3-2-Array"><a href="#3-2-Array" class="headerlink" title="3.2.Array"></a>3.2.Array</h4><p>We can also use array to implement binary tree.</p>
+<p>If the index of the node is i, then its left son has the index of (i * 2 + 1) and its right son (i * 2 + 2)</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/5QMYSJc7"><img src="https://i.postimg.cc/C5RGYMcg/Day-14-Binary-Tree-Part01-05.jpg" alt="Day-14-Binary-Tree-Part01-05.jpg"></a></p>
+<h3 id="4-The-Iteration-of-Binary-Tree"><a href="#4-The-Iteration-of-Binary-Tree" class="headerlink" title="4.The Iteration of Binary Tree"></a>4.The Iteration of Binary Tree</h3><h4 id="4-1-DFS"><a href="#4-1-DFS" class="headerlink" title="4.1.DFS"></a>4.1.DFS</h4><p>Understand all three methods by the position of root.</p>
+<h5 id="4-1-1-PreOrder"><a href="#4-1-1-PreOrder" class="headerlink" title="4.1.1.PreOrder"></a>4.1.1.PreOrder</h5><p>Root at head</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/2LhzTLdh"><img src="https://i.postimg.cc/fygJzxJ2/Day-14-Binary-Tree-Part01-06.jpg" alt="Day-14-Binary-Tree-Part01-06.jpg"></a></p>
+<h5 id="4-1-2-InOrder"><a href="#4-1-2-InOrder" class="headerlink" title="4.1.2.InOrder"></a>4.1.2.InOrder</h5><p>Root at middle</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/mtWZkVRw"><img src="https://i.postimg.cc/pXpm016g/Day-14-Binary-Tree-Part01-07.jpg" alt="Day-14-Binary-Tree-Part01-07.jpg"></a></p>
+<h5 id="4-1-3PostOrder"><a href="#4-1-3PostOrder" class="headerlink" title="4.1.3PostOrder"></a>4.1.3PostOrder</h5><p>Root at end</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/xqzT9Br8"><img src="https://i.postimg.cc/v8P1td3r/Day-14-Binary-Tree-Part01-08.jpg" alt="Day-14-Binary-Tree-Part01-08.jpg"></a></p>
+<h4 id="4-2-BFS"><a href="#4-2-BFS" class="headerlink" title="4.2.BFS"></a>4.2.BFS</h4><p>By layer</p>
+<h2 id="144-Binary-Tree-Preorder-Traversal"><a href="#144-Binary-Tree-Preorder-Traversal" class="headerlink" title="144. Binary Tree Preorder Traversal"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-preorder-traversal/">144. Binary Tree Preorder Traversal</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary tree, return the preorder traversal of its nodes’ values.</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Recursion"><a href="#1-Recursion" class="headerlink" title="1.Recursion"></a>1.Recursion</h4><p>We can follow three rules while writing recursion</p>
+<ol>
+<li>Confirm the params and returned value of recursion function</li>
+<li>Confirm the end condition, otherwise there might be stack overflow</li>
+<li>Confirm the logic of single layer of recursion</li>
+</ol>
+<p>As for preorder traversal, we can realize three rules</p>
+<ol>
+<li><p>The params should be the current node and the container that stores the result</p>
+<ul>
+<li>void preorder(Treenode root, List<Integer> list)</li>
+</ul>
+</li>
+<li><p>The end condition should be when the current root is null, which means it is time to return</p>
+<ul>
+<li>if (root &#x3D;&#x3D; null) {return}</li>
+</ul>
+</li>
+<li><p>The logic of single layer is to firstly store the root, then do recursion of its left, and at last do recursion of its right</p>
+<ul>
+<li>list.add(root.value);</li>
+<li>preorder(root.left, list);</li>
+<li>preorder(root.right, list);</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">preorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    preorder(root, list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">preorder</span><span class="params">(TreeNode root, List&lt;Integer&gt; list)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    list.add(root.val);</span><br><span class="line">    preorder(root.left, list);</span><br><span class="line">    preorder(root.right, list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Stack"><a href="#2-Stack" class="headerlink" title="2.Stack"></a>2.Stack</h4><p>We can also use a stack to do the iteration rather than recursion</p>
+<p>For example, if a tree is </p>
+<p>​		5</p>
+<p>​	4	6</p>
+<p>1	2</p>
+<p>We use a stack to iterate</p>
+<ol>
+<li>stack: 5 <ul>
+<li>then 5 is popped and added to list</li>
+<li>list: 5</li>
+</ul>
+</li>
+<li>stack: 6<ul>
+<li>We first put the right son of 5 because it is stack and what is pushed first gets popped last</li>
+</ul>
+</li>
+<li>stack: 6 4<ul>
+<li>We then put the left son of 5</li>
+</ul>
+</li>
+<li>stack: 6<ul>
+<li>4 gets popped out and added to list</li>
+<li>list: 5 4</li>
+</ul>
+</li>
+<li>stack: 6 2<ul>
+<li>The right son of 4 gets pushed in</li>
+</ul>
+</li>
+<li>stack: 6 2 1<ul>
+<li>The left son of 4 gets pushed in</li>
+</ul>
+</li>
+<li>stack: 6 2<ul>
+<li>1 gets popped out and added to list</li>
+<li>list: 5 4 1</li>
+</ul>
+</li>
+<li>stack: 6<ul>
+<li>2 gets popped out and added to list</li>
+<li>list: 5 4 1 2</li>
+</ul>
+</li>
+<li>stack: <ul>
+<li>6 gets popped out and added to list</li>
+<li>list: 5 4 1 2 6</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Stack</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">preorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    Deque&lt;TreeNode&gt; stack = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// Put the root in stack so that iteration can begin</span></span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    stack.push(root);</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> stack.pop();</span><br><span class="line">        <span class="comment">// We must pay attention to the order of pushing</span></span><br><span class="line">        <span class="comment">// Since it is preorder, the order would be to root, root.left and root.right</span></span><br><span class="line">        <span class="comment">// But for stack, the popped out element would be the last element pushed</span></span><br><span class="line">        <span class="comment">// So the push order should be opposite to the preorder order, which means</span></span><br><span class="line">        <span class="comment">// we should push right first, then left</span></span><br><span class="line">        list.add(node.val);</span><br><span class="line">        <span class="keyword">if</span> (node.right != <span class="literal">null</span>) &#123;</span><br><span class="line">            stack.push(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (node.left != <span class="literal">null</span>) &#123;</span><br><span class="line">            stack.push(node.left);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="145-Binary-Tree-Postorder-Traversal"><a href="#145-Binary-Tree-Postorder-Traversal" class="headerlink" title="145. Binary Tree Postorder Traversal"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-postorder-traversal/">145. Binary Tree Postorder Traversal</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary tree, return the postorder traversal of its nodes’ values.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Recursion-1"><a href="#1-Recursion-1" class="headerlink" title="1.Recursion"></a>1.Recursion</h4><p>As for postorder traversal, we can realize three rules</p>
+<ol>
+<li><p>The params should be the current node and the container that stores the result</p>
+<ul>
+<li>void preorder(Treenode root, List<Integer> list)</li>
+</ul>
+</li>
+<li><p>The end condition should be when the current root is null, which means it is time to return</p>
+<ul>
+<li>if (root &#x3D;&#x3D; null) {return}</li>
+</ul>
+</li>
+<li><p>The logic of single layer is to firstly do recursion of its left, then do recursion of its right, and at last store root’s value</p>
+<ul>
+<li><p>preorder(root.left, list);</p>
+</li>
+<li><p>preorder(root.right, list);</p>
+</li>
+<li><p>list.add(root.value);</p>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">postorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    postorder(root, list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">postorder</span><span class="params">(TreeNode root, List&lt;Integer&gt; list)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    postorder(root.left, list);</span><br><span class="line">    postorder(root.right, list);</span><br><span class="line">    list.add(root.val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Stack-1"><a href="#2-Stack-1" class="headerlink" title="2.Stack"></a>2.Stack</h4><p>Postorder can be modified from preorder since the order of postorder, which is left, right, root, can be achieved by firstly swapping the order of left and right from preorder followed by reversing the result list.</p>
+<p>For example, if a tree is </p>
+<p>​		5</p>
+<p>​	4	6</p>
+<p>1	2</p>
+<p>We use a stack to iterate</p>
+<ol>
+<li><p>stack: 5 </p>
+<ul>
+<li>then 5 is popped and added to list</li>
+<li>list: 5</li>
+</ul>
+</li>
+<li><p>stack: 4</p>
+<ul>
+<li>We first put the left son of 5 because it is stack and what is pushed first gets popped last</li>
+</ul>
+</li>
+<li><p>stack: 4 6</p>
+<ul>
+<li>We then put the right son of 5</li>
+</ul>
+</li>
+<li><p>stack: 4</p>
+<ul>
+<li>6 gets popped out and added to list</li>
+<li>list: 5 6</li>
+</ul>
+</li>
+<li><p>stack: 1</p>
+<ul>
+<li>4 gets popped and added to list</li>
+<li>The left son of 4 gets pushed in</li>
+<li>list: 5 6 4</li>
+</ul>
+</li>
+<li><p>stack: 1 2</p>
+<ul>
+<li>The right son of 4 gets pushed in</li>
+</ul>
+</li>
+<li><p>stack: 1</p>
+<ul>
+<li>2 gets popped out and added to list</li>
+<li>list: 5 6 4 2</li>
+</ul>
+</li>
+<li><p>stack: </p>
+<ul>
+<li>1 gets popped out and added to list</li>
+<li>list: 5 6 4 2 1</li>
+</ul>
+</li>
+<li><p>We finally reverse the list and get what we want</p>
+<ul>
+<li>list: 1 2 4 6 5</li>
+</ul>
+</li>
+</ol>
+<h2 id="94-Binary-Tree-Inorder-Traversal"><a href="#94-Binary-Tree-Inorder-Traversal" class="headerlink" title="94. Binary Tree Inorder Traversal"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-inorder-traversal/">94. Binary Tree Inorder Traversal</a></h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary tree, return the inorder traversal of its nodes’ values.</p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Recursion-2"><a href="#1-Recursion-2" class="headerlink" title="1.Recursion"></a>1.Recursion</h4><p>As for inorder traversal, we can realize three rules</p>
+<ol>
+<li><p>The params should be the current node and the container that stores the result</p>
+<ul>
+<li>void preorder(Treenode root, List<Integer> list)</li>
+</ul>
+</li>
+<li><p>The end condition should be when the current root is null, which means it is time to return</p>
+<ul>
+<li>if (root &#x3D;&#x3D; null) {return}</li>
+</ul>
+</li>
+<li><p>The logic of single layer is to firstly do recursion of its left, then store root’s value, and at last do recursion of its right</p>
+<ul>
+<li><p>preorder(root.left, list);</p>
+</li>
+<li><p>list.add(root.value);</p>
+</li>
+<li><p>preorder(root.right, list);</p>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">inorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    inorder(root, list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">inorder</span><span class="params">(TreeNode root, List&lt;Integer&gt; list)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    inorder(root.left, list);</span><br><span class="line">    list.add(root.val);</span><br><span class="line">    inorder(root.right, list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Stack-2"><a href="#2-Stack-2" class="headerlink" title="2.Stack"></a>2.Stack</h4><p>Using stack to iterate tree in inorder is more difficult than previous two orders because the order of visiting each node and the order of dealing with each node is different. When we visit the root, we cannot add it in the result list until we visit the left node at bottom. To solve this problem, we can introduce a cursor that points to the node we visit.</p>
+<p>For example, if a tree is </p>
+<p>​		5</p>
+<p>​	4	6</p>
+<p>1	2</p>
+<p>We use a stack and cursor to iterate</p>
+<ol>
+<li>stack: null<ul>
+<li>cur &#x3D; 5</li>
+</ul>
+</li>
+<li>stack: 5<ul>
+<li>cur &#x3D; 5.left &#x3D; 4</li>
+</ul>
+</li>
+<li>stack: 5 4<ul>
+<li>cur &#x3D; 4.left &#x3D; 1</li>
+</ul>
+</li>
+<li>stack: 5 4 1<ul>
+<li>cur &#x3D; 1.left &#x3D; null</li>
+</ul>
+</li>
+<li>stack: 5 4<ul>
+<li>cur &#x3D; 1.right &#x3D; null</li>
+<li>list: 1</li>
+</ul>
+</li>
+<li>stack: 5<ul>
+<li>cur &#x3D; 4.right &#x3D; 2</li>
+<li>list: 1 4</li>
+</ul>
+</li>
+<li>stack: 5 2<ul>
+<li>cur &#x3D; 2.left &#x3D; null</li>
+</ul>
+</li>
+<li>stack: 5<ul>
+<li>cur &#x3D; 2.right &#x3D; null</li>
+<li>list: 1 4 2</li>
+</ul>
+</li>
+<li>stack: <ul>
+<li>cur &#x3D; 5.right &#x3D; 6</li>
+<li>list: 1 4 2 5</li>
+</ul>
+</li>
+<li>stack: 6<ul>
+<li>cur &#x3D; 6.left &#x3D; null</li>
+</ul>
+</li>
+<li>stack:<ul>
+<li>cur &#x3D; 6.right &#x3D; null</li>
+<li>list: 1 4 2 5 6</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Stack</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">inorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">    Deque&lt;TreeNode&gt; stack = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// We need a cursor to track the node</span></span><br><span class="line">    <span class="type">TreeNode</span> <span class="variable">cur</span> <span class="operator">=</span> root;</span><br><span class="line">    <span class="keyword">while</span> (cur != <span class="literal">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (cur != <span class="literal">null</span>) &#123;</span><br><span class="line">            stack.push(cur);</span><br><span class="line">            cur = cur.left;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            cur = stack.pop();</span><br><span class="line">            list.add(cur.val);</span><br><span class="line">            cur = cur.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Recursion/" rel="tag"># Recursion</a>
+              <a href="/tags/Stack/" rel="tag"># Stack</a>
+              <a href="/tags/Binary-Tree/" rel="tag"># Binary_Tree</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/01/Day13-Stack-And-Queue-Part03/" rel="prev" title="Day13 Stack And Queue Part03">
+      <i class="fa fa-chevron-left"></i> Day13 Stack And Queue Part03
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-Concept"><span class="nav-number">1.</span> <span class="nav-text">Binary Tree Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Perfect-Binary-Tree-amp-Complete-Binary-Tree"><span class="nav-number">1.1.</span> <span class="nav-text">1.Perfect Binary Tree &amp; Complete Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-Perfect-Binary-Tree"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.Perfect Binary Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-Complete-Binary-Tree"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2.Complete Binary Tree</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Binary-Search-Tree"><span class="nav-number">1.2.</span> <span class="nav-text">2.Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Binary-Search-Tree"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1.Binary Search Tree</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-AVL-Tree"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2.AVL Tree</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-The-Implementation-of-Binary-Tree"><span class="nav-number">1.3.</span> <span class="nav-text">3.The Implementation of Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Linked-List"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1.Linked List</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Array"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2.Array</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-The-Iteration-of-Binary-Tree"><span class="nav-number">1.4.</span> <span class="nav-text">4.The Iteration of Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-DFS"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1.DFS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-1-PreOrder"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">4.1.1.PreOrder</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-2-InOrder"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">4.1.2.InOrder</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-3PostOrder"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">4.1.3PostOrder</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-BFS"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2.BFS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#144-Binary-Tree-Preorder-Traversal"><span class="nav-number">2.</span> <span class="nav-text">144. Binary Tree Preorder Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">2.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">2.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Recursion"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.Recursion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Stack"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.Stack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#145-Binary-Tree-Postorder-Traversal"><span class="nav-number">3.</span> <span class="nav-text">145. Binary Tree Postorder Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-1"><span class="nav-number">3.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-number">3.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Recursion-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">1.Recursion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Stack-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.Stack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#94-Binary-Tree-Inorder-Traversal"><span class="nav-number">4.</span> <span class="nav-text">94. Binary Tree Inorder Traversal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-2"><span class="nav-number">4.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2"><span class="nav-number">4.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Recursion-2"><span class="nav-number">4.2.1.</span> <span class="nav-text">1.Recursion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Stack-2"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.Stack</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhao Yiwei"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhao Yiwei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhaoYiwei0311" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoYiwei0311" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaoyiwei0311@gmail.com" title="E-Mail → mailto:zhaoyiwei0311@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhao Yiwei</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">68k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">1:02</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.postimg.cc/tJKKm4DJ/Day12-Stack-And-Queue-Part03-01.jpg">
 <meta property="article:published_time" content="2023-05-01T13:48:09.000Z">
-<meta property="article:modified_time" content="2023-05-01T13:51:25.831Z">
+<meta property="article:modified_time" content="2023-05-01T13:53:13.663Z">
 <meta property="article:author" content="Zhao Yiwei">
 <meta property="article:tag" content="Stack">
 <meta property="article:tag" content="Queue">
@@ -218,7 +218,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-05-01 21:48:09 / Modified: 21:51:25" itemprop="dateCreated datePublished" datetime="2023-05-01T21:48:09+08:00">2023-05-01</time>
+              <time title="Created: 2023-05-01 21:48:09 / Modified: 21:53:13" itemprop="dateCreated datePublished" datetime="2023-05-01T21:48:09+08:00">2023-05-01</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,7 +265,7 @@
 <h2 id="347-Top-K-Frequent-Elements"><a href="#347-Top-K-Frequent-Elements" class="headerlink" title="347. Top K Frequent Elements"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-elements/">347. Top K Frequent Elements</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.</p>
 <h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Min-Heap"><a href="#1-Min-Heap" class="headerlink" title="1. Min Heap"></a>1. Min Heap</h4><p>We can rely on the data structure, min heap, to solve this question because this kind of structure is quite good at collecting the extreme number among a lot of numbers through its top, where the extreme number, the smallest one if it is min heap and the biggest one if it is max heap is stored.</p>
 <p><a target="_blank" rel="noopener" href="https://postimg.cc/gLKtxdCb"><img src="https://i.postimg.cc/tJKKm4DJ/Day12-Stack-And-Queue-Part03-01.jpg" alt="Day12-Stack-And-Queue-Part03-01.jpg"></a><br>    min heap</p>
-<p>One question which arises is why we use min heap rather than max heap in this question. That is because the min heap stores the element with the lowest frequency on its top and we can pop the top element if the heap’s size overpasses k, which is the size of to-be-returned array, leaving elements with the highest frequency at last.</p>
+<p>One question which arises is why we use min heap rather than max heap in this question. That is because the min heap stores the element with the lowest frequency on its top and we can pop the top element if the heap’s size surpasses k, which is the size of to-be-returned array, leaving elements with the highest frequency at last.</p>
 <p>Another question is how we can realize min heap in java. The answer is priority queue, but we must realize its comparator in this question.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Min Heap</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span>[] topKFrequent(<span class="type">int</span>[] nums, <span class="type">int</span> k) &#123;</span><br><span class="line">    <span class="comment">// 1.We first iterate nums and get the hashmap that records frequency of each element</span></span><br><span class="line">    HashMap&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (map.containsKey(nums[i])) &#123;</span><br><span class="line">            map.put(nums[i], map.get(nums[i]) + <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.put(nums[i], <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2.We rely on min heap in this question and the realization of it in java is</span></span><br><span class="line">    <span class="comment">//  priority queue</span></span><br><span class="line">    PriorityQueue&lt;Map.Entry&lt;Integer, Integer&gt;&gt; priorityQueue = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Map.Entry&lt;Integer, Integer&gt;&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="comment">// It should be a min heap, which means the smallest one should be on the top</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Map.Entry&lt;Integer, Integer&gt; o1, Map.Entry&lt;Integer, Integer&gt; o2)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> o1.getValue() - o2.getValue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 3.We then iterate map and put element in the priorityQueue</span></span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;Integer, Integer&gt; entry : map.entrySet()) &#123;</span><br><span class="line">        priorityQueue.offer(entry);</span><br><span class="line">        <span class="comment">// If the size of priorityQueue is bigger than k, it means we should remove the top element,</span></span><br><span class="line">        <span class="comment">// which is the current number with the lowest frequency</span></span><br><span class="line">        <span class="keyword">if</span> (priorityQueue.size() &gt; k) &#123;</span><br><span class="line">            priorityQueue.poll();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 4.We finally fill the array</span></span><br><span class="line">    <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[k];</span><br><span class="line">    <span class="comment">// 5.Although the question does not ask for return the array in desc order, we can do so</span></span><br><span class="line">    <span class="comment">// by iterating from end</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> k - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        ans[i] = priorityQueue.poll().getKey();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
@@ -291,7 +291,10 @@
     <a href="/2023/04/29/Day11-Stack-And-Queue-Part02/" rel="prev" title="Day11 Stack And Queue Part02">
       <i class="fa fa-chevron-left"></i> Day11 Stack And Queue Part02
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/02/Day14-Binary-Tree-Part01/" rel="next" title="Day14 Binary Tree Part01">
+      Day14 Binary Tree Part01 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -366,7 +369,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -379,7 +382,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -423,12 +426,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">61k</span>
+    <span title="Symbols count total">68k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">55 mins.</span>
+    <span title="Reading time total">1:02</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
