@@ -29,18 +29,18 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.postimg.cc/7LyvFptb/Day-14-Binary-Tree-Part01-01.jpg">
 <meta property="og:image" content="https://i.postimg.cc/T1jQW4qN/Day-14-Binary-Tree-Part01-02.jpg">
-<meta property="og:image" content="https://i.postimg.cc/gjXJjCV8/Day-14-Binary-Tree-Part01-03.jpg">
 <meta property="og:image" content="https://i.postimg.cc/vH6FBWKJ/Day-14-Binary-Tree-Part01-04.jpg">
 <meta property="og:image" content="https://i.postimg.cc/C5RGYMcg/Day-14-Binary-Tree-Part01-05.jpg">
 <meta property="og:image" content="https://i.postimg.cc/fygJzxJ2/Day-14-Binary-Tree-Part01-06.jpg">
 <meta property="og:image" content="https://i.postimg.cc/pXpm016g/Day-14-Binary-Tree-Part01-07.jpg">
 <meta property="og:image" content="https://i.postimg.cc/v8P1td3r/Day-14-Binary-Tree-Part01-08.jpg">
 <meta property="article:published_time" content="2023-05-02T07:37:19.000Z">
-<meta property="article:modified_time" content="2023-05-02T07:39:07.801Z">
+<meta property="article:modified_time" content="2023-05-03T08:19:10.931Z">
 <meta property="article:author" content="Zhao Yiwei">
 <meta property="article:tag" content="Recursion">
 <meta property="article:tag" content="Stack">
 <meta property="article:tag" content="Binary_Tree">
+<meta property="article:tag" content="DFS">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.postimg.cc/7LyvFptb/Day-14-Binary-Tree-Part01-01.jpg">
 
@@ -222,10 +222,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2023-05-02 15:37:19 / Modified: 15:39:07" itemprop="dateCreated datePublished" datetime="2023-05-02T15:37:19+08:00">2023-05-02</time>
+              <time title="Created: 2023-05-02 15:37:19" itemprop="dateCreated datePublished" datetime="2023-05-02T15:37:19+08:00">2023-05-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-03 16:19:10" itemprop="dateModified" datetime="2023-05-03T16:19:10+08:00">2023-05-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -242,14 +248,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>7.4k</span>
+              <span>9.6k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>7 mins.</span>
+              <span>9 mins.</span>
             </span>
 
         </div>
@@ -273,7 +279,7 @@
 <li>If one node has right subtree, then all nodes from this subtree is bigger than this node.</li>
 <li>The left subtree and the right subtree of one node is also binary search tree.</li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://postimg.cc/GTRrSSSm"><img src="https://i.postimg.cc/gjXJjCV8/Day-14-Binary-Tree-Part01-03.jpg" alt="Day-14-Binary-Tree-Part01-03.jpg"></a></p>
+<p> &#x2F;** * Min Heap *&#x2F;public int[] topKFrequent(int[] nums, int k) {    &#x2F;&#x2F; 1.We first iterate nums and get the hashmap that records frequency of each element    HashMap&lt;Integer, Integer&gt; map &#x3D; new HashMap&lt;&gt;();    for (int i &#x3D; 0; i &lt; nums.length; i++) {        if (map.containsKey(nums[i])) {            map.put(nums[i], map.get(nums[i]) + 1);        } else {            map.put(nums[i], 1);        }    }    &#x2F;&#x2F; 2.We rely on min heap in this question and the realization of it in java is    &#x2F;&#x2F;  priority queue    PriorityQueue&lt;Map.Entry&lt;Integer, Integer&gt;&gt; priorityQueue &#x3D; new PriorityQueue&lt;&gt;(new Comparator&lt;Map.Entry&lt;Integer, Integer&gt;&gt;() {        @Override        &#x2F;&#x2F; It should be a min heap, which means the smallest one should be on the top        public int compare(Map.Entry&lt;Integer, Integer&gt; o1, Map.Entry&lt;Integer, Integer&gt; o2) {            return o1.getValue() - o2.getValue();        }    });    &#x2F;&#x2F; 3.We then iterate map and put element in the priorityQueue    for (Map.Entry&lt;Integer, Integer&gt; entry : map.entrySet()) {        priorityQueue.offer(entry);        &#x2F;&#x2F; If the size of priorityQueue is bigger than k, it means we should remove the top element,        &#x2F;&#x2F; which is the current number with the lowest frequency        if (priorityQueue.size() &gt; k) {            priorityQueue.poll();        }    }    &#x2F;&#x2F; 4.We finally fill the array    int[] ans &#x3D; new int[k];    &#x2F;&#x2F; 5.Although the question does not ask for return the array in desc order, we can do so    &#x2F;&#x2F; by iterating from end    for (int i &#x3D; k - 1; i &gt;&#x3D; 0; i–) {        ans[i] &#x3D; priorityQueue.poll().getKey();    }    return ans;}java</p>
 <h4 id="2-2-AVL-Tree"><a href="#2-2-AVL-Tree" class="headerlink" title="2.2.AVL Tree"></a>2.2.AVL Tree</h4><p>AVL tree is a special search tree.</p>
 <ul>
 <li>It can be an empty tree</li>
@@ -458,6 +464,8 @@
 </ul>
 </li>
 </ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Stack</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">postorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    Deque&lt;TreeNode&gt; stack = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// Put the root in stack so that iteration can begin</span></span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">    stack.push(root);</span><br><span class="line">    <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> stack.pop();</span><br><span class="line">        <span class="comment">// We must pay attention to the order of pushing</span></span><br><span class="line">        <span class="comment">// Since it is postorder, the order would be to root.left, root.right and root</span></span><br><span class="line">        <span class="comment">// But for stack, the popped out element would be the last element pushed</span></span><br><span class="line">        <span class="comment">// So the push order should be opposite to the preorder order, which means</span></span><br><span class="line">        <span class="comment">// we should push left first, then right</span></span><br><span class="line">        list.add(node.val);</span><br><span class="line">        <span class="keyword">if</span> (node.left != <span class="literal">null</span>) &#123;</span><br><span class="line">            stack.push(node.left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (node.right != <span class="literal">null</span>) &#123;</span><br><span class="line">            stack.push(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Since postorder is modified from preorder, we have to reverse the list at last.</span></span><br><span class="line">    Collections.reverse(list);</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="94-Binary-Tree-Inorder-Traversal"><a href="#94-Binary-Tree-Inorder-Traversal" class="headerlink" title="94. Binary Tree Inorder Traversal"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-inorder-traversal/">94. Binary Tree Inorder Traversal</a></h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary tree, return the inorder traversal of its nodes’ values.</p>
 <h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Recursion-2"><a href="#1-Recursion-2" class="headerlink" title="1.Recursion"></a>1.Recursion</h4><p>As for inorder traversal, we can realize three rules</p>
 <ol>
@@ -554,6 +562,7 @@
               <a href="/tags/Recursion/" rel="tag"># Recursion</a>
               <a href="/tags/Stack/" rel="tag"># Stack</a>
               <a href="/tags/Binary-Tree/" rel="tag"># Binary_Tree</a>
+              <a href="/tags/DFS/" rel="tag"># DFS</a>
           </div>
 
         
@@ -565,7 +574,10 @@
     <a href="/2023/05/01/Day13-Stack-And-Queue-Part03/" rel="prev" title="Day13 Stack And Queue Part03">
       <i class="fa fa-chevron-left"></i> Day13 Stack And Queue Part03
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/03/Day15-Binary-Tree-Part02/" rel="next" title="Day15 Binary Tree Part02">
+      Day15 Binary Tree Part02 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -640,7 +652,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -653,7 +665,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -697,12 +709,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">68k</span>
+    <span title="Symbols count total">85k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1:02</span>
+    <span title="Reading time total">1:17</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
