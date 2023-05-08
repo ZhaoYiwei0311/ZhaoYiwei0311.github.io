@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Day20 Binary Tree Part06654. Maximum Binary TreeIntroYou are given an integer array nums with no duplicates. A maximum binary tree can be built recursively from nums using the following algorithm:  Cr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day20 Binary Tree Part06">
+<meta property="og:url" content="http://example.com/2023/05/08/Day20-Binary-Tree-Part06/index.html">
+<meta property="og:site_name" content="My_Study_Blog">
+<meta property="og:description" content="Day20 Binary Tree Part06654. Maximum Binary TreeIntroYou are given an integer array nums with no duplicates. A maximum binary tree can be built recursively from nums using the following algorithm:  Cr">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-08T11:04:24.000Z">
+<meta property="article:modified_time" content="2023-05-08T11:07:29.801Z">
+<meta property="article:author" content="Zhao Yiwei">
+<meta property="article:tag" content="Recursion">
+<meta property="article:tag" content="Binary_Tree">
+<meta property="article:tag" content="DFS">
+<meta property="article:tag" content="Level_Traversal">
+<meta property="article:tag" content="BFS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/05/08/Day20-Binary-Tree-Part06/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Day20 Binary Tree Part06 | My_Study_Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">My_Study_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/08/Day20-Binary-Tree-Part06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day20 Binary Tree Part06
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-08 19:04:24 / Modified: 19:07:29" itemprop="dateCreated datePublished" datetime="2023-05-08T19:04:24+08:00">2023-05-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>7.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>7 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Day20-Binary-Tree-Part06"><a href="#Day20-Binary-Tree-Part06" class="headerlink" title="Day20 Binary Tree Part06"></a>Day20 Binary Tree Part06</h1><h4 id="654-Maximum-Binary-Tree"><a href="#654-Maximum-Binary-Tree" class="headerlink" title="654. Maximum Binary Tree"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-binary-tree/">654. Maximum Binary Tree</a></h4><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>You are given an integer array nums with no duplicates. A maximum binary tree can be built recursively from nums using the following algorithm:</p>
+<ol>
+<li>Create a root node whose value is the maximum value in nums.</li>
+<li>Recursively build the left subtree on the subarray prefix to the left of the maximum value.</li>
+<li>Recursively build the right subtree on the subarray suffix to the right of the maximum value.</li>
+</ol>
+<p>Return the maximum binary tree built from nums.</p>
+<span id="more"></span>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Recursion"><a href="#1-Recursion" class="headerlink" title="1.Recursion"></a>1.Recursion</h4><p>It is quite similar to the [106. Construct Binary Tree from Inorder and Postorder Traversal](app:&#x2F;&#x2F;obsidian.md&#x2F;Day18 Binary Tree Part05#<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">106. Construct Binary Tree from Inorder and Postorder Traversal</a>)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> TreeNode <span class="title function_">constructMaximumBinaryTree</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">    <span class="type">TreeNode</span> <span class="variable">root</span> <span class="operator">=</span> traversal(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> TreeNode <span class="title function_">traversal</span><span class="params">(<span class="type">int</span>[] nums, <span class="type">int</span> start, <span class="type">int</span> end)</span> &#123;</span><br><span class="line">    <span class="comment">// 1.First we confirm returned value and params</span></span><br><span class="line">    <span class="comment">//  we use pointer to cut array, so what we need for extra is a start pointer and an</span></span><br><span class="line">    <span class="comment">//  end one.</span></span><br><span class="line">    <span class="comment">// 2.Then we confirm end conditions</span></span><br><span class="line">    <span class="comment">//  if end - start &lt; 0, it means that we can only have null node for child, which</span></span><br><span class="line">    <span class="comment">//  results in returning null</span></span><br><span class="line">    <span class="comment">// 3.Finally, we confirm logic</span></span><br><span class="line">    <span class="comment">//  we do recursion with different start and end</span></span><br><span class="line">    <span class="keyword">if</span> (end - start &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> Integer.MIN_VALUE;</span><br><span class="line">    <span class="type">int</span> <span class="variable">maxIndex</span> <span class="operator">=</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start; i &lt;= end ; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] &gt; max) &#123;</span><br><span class="line">            max = nums[i];</span><br><span class="line">            maxIndex = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeNode</span>(max);</span><br><span class="line">    <span class="type">int</span> <span class="variable">leftEnd</span> <span class="operator">=</span> maxIndex - <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">rightStart</span> <span class="operator">=</span> maxIndex + <span class="number">1</span>;</span><br><span class="line">    node.left = traversal(nums, start, leftEnd);</span><br><span class="line">    node.right = traversal(nums, rightStart, end);</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="617-Merge-Two-Binary-Trees"><a href="#617-Merge-Two-Binary-Trees" class="headerlink" title="617. Merge Two Binary Trees"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-binary-trees/">617. Merge Two Binary Trees</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>You are given two binary trees root1 and root2.</p>
+<p>Imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not. You need to merge the two trees into a new binary tree. The merge rule is that if two nodes overlap, then sum node values up as the new value of the merged node. Otherwise, the NOT null node will be used as the node of the new tree.</p>
+<p>Return the merged tree.</p>
+<p>Note: The merging process must start from the root nodes of both trees.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Level-Traversal"><a href="#1-Level-Traversal" class="headerlink" title="1.Level Traversal"></a>1.Level Traversal</h4><p>I have thought too much at first while dealing with the case like one node’s left is null while the other one’s is not. Actually, it does not matter because we can just replace null node with non-null node if node1’s left is null and if node2’s left is null, we can even do nothing because node1’s left can just remain correct.</p>
+<p>As for the case when both nodes’ left are null, I also thought too much at first. But in fact, putting only non-null nodes into queues can just avoid this situation.</p>
+<p>Also there is one more point to mention. While handling null situation, we can firstly judge node1 and if node1 is null, we can just simply return node2. Then judge node2 in the same way. Even in the case when both nodes are null, this method is also correct.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Layer Traversal</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> TreeNode <span class="title function_">mergeTrees</span><span class="params">(TreeNode root1, TreeNode root2)</span> &#123;</span><br><span class="line">    <span class="comment">// if (root1 == null &amp;&amp; root2 == null) &#123;</span></span><br><span class="line">    <span class="comment">//     return null;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// codes above can be converted to the codes below, which is more concise</span></span><br><span class="line">    <span class="comment">// and can avoid bugs in case like root1 == null and root2 == [1]</span></span><br><span class="line">    <span class="keyword">if</span> (root1 == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> root2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root2 == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> root1;</span><br><span class="line">    &#125;</span><br><span class="line">    Queue&lt;TreeNode&gt; queue1 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    Queue&lt;TreeNode&gt; queue2 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    queue1.add(root1);</span><br><span class="line">    queue2.add(root2);</span><br><span class="line">    <span class="keyword">while</span> (!queue1.isEmpty()) &#123;</span><br><span class="line">        <span class="comment">// We will only put non-null node in queues, so these two nodes popped</span></span><br><span class="line">        <span class="comment">// will not be null</span></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">popped1</span> <span class="operator">=</span> queue1.poll();</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">popped2</span> <span class="operator">=</span> queue2.poll();</span><br><span class="line">        popped1.val += popped2.val;</span><br><span class="line">        <span class="keyword">if</span> (popped1.left != <span class="literal">null</span> &amp;&amp; popped2.left != <span class="literal">null</span>) &#123;</span><br><span class="line">            queue1.add(popped1.left);</span><br><span class="line">            queue2.add(popped2.left);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (popped1.right != <span class="literal">null</span> &amp;&amp; popped2.right != <span class="literal">null</span>) &#123;</span><br><span class="line">            queue1.add(popped1.right);</span><br><span class="line">            queue2.add(popped2.right);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// What about popped1.left != null &amp;&amp; popped2.left == null</span></span><br><span class="line">        <span class="comment">// Actually, this does not matter because there will be no subtree of</span></span><br><span class="line">        <span class="comment">// popped2.left, so popped1.left will just remain.</span></span><br><span class="line">        <span class="keyword">if</span> (popped1.left == <span class="literal">null</span> &amp;&amp; popped2.left != <span class="literal">null</span>) &#123;</span><br><span class="line">            popped1.left = popped2.left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (popped1.right == <span class="literal">null</span> &amp;&amp; popped2.right != <span class="literal">null</span>) &#123;</span><br><span class="line">            popped1.right = popped2.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Recursion-Preorder"><a href="#2-Recursion-Preorder" class="headerlink" title="2. Recursion + Preorder"></a>2. Recursion + Preorder</h4><p>Pay attention to end conditions</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion + Preorder</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> TreeNode <span class="title function_">mergeTrees</span><span class="params">(TreeNode root1, TreeNode root2)</span> &#123;</span><br><span class="line">    <span class="comment">// 1.First we confirm returned value and params</span></span><br><span class="line">    <span class="comment">//      TreeNode mergeTrees(TreeNode root1, TreeNode root2)</span></span><br><span class="line">    <span class="comment">// 2.Then we confirm end conditions</span></span><br><span class="line">    <span class="comment">//  Still we return when we face null conditions, but there are two nodes now,</span></span><br><span class="line">    <span class="comment">//  so shall we judge three times to see if both are null or node1 is null or</span></span><br><span class="line">    <span class="comment">//  node2 is null?</span></span><br><span class="line">    <span class="comment">//  Actually there is no need. We can judge firstly node1 and return node2 if node1</span></span><br><span class="line">    <span class="comment">//  is null. Then we can judge node2 and return node1 if node2 is null. This can</span></span><br><span class="line">    <span class="comment">//  apply even for the case when two nodes are null</span></span><br><span class="line">    <span class="comment">// 3.Finally, we confirm logic</span></span><br><span class="line">    <span class="comment">//  We just add up values.</span></span><br><span class="line">    <span class="keyword">if</span> (root1 == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> root2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root2 == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> root1;</span><br><span class="line">    &#125;</span><br><span class="line">    root1.val += root2.val;</span><br><span class="line">    root1.left = mergeTrees(root1.left, root2.left);</span><br><span class="line">    root1.right = mergeTrees(root1.right, root2.right);</span><br><span class="line">    <span class="keyword">return</span> root1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="700-Search-in-a-Binary-Search-Tree"><a href="#700-Search-in-a-Binary-Search-Tree" class="headerlink" title="700. Search in a Binary Search Tree"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-a-binary-search-tree/">700. Search in a Binary Search Tree</a></h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>You are given the root of a binary search tree (BST) and an integer val.</p>
+<p>Find the node in the BST that the node’s value equals val and return the subtree rooted with that node. If such a node does not exist, return null.</p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Recursion-1"><a href="#1-Recursion-1" class="headerlink" title="1.Recursion"></a>1.Recursion</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> TreeNode <span class="title function_">searchBST</span><span class="params">(TreeNode root, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="comment">// 1.First we confirm returned value and params</span></span><br><span class="line">    <span class="comment">//      TreeNode searchBST(TreeNode root, int val)</span></span><br><span class="line">    <span class="comment">// 2.Then we confirm end conditions</span></span><br><span class="line">    <span class="comment">//  We return when root is null or root&#x27;s value equals to val</span></span><br><span class="line">    <span class="comment">// 3.Finally, we confirm logic</span></span><br><span class="line">    <span class="comment">//  Since it is binary search tree, we can search like doing binary</span></span><br><span class="line">    <span class="comment">//  search in an ordered array</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// if (root == null) &#123;</span></span><br><span class="line">    <span class="comment">//     return null;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// if (root.val == val) &#123;</span></span><br><span class="line">    <span class="comment">//     return root;</span></span><br><span class="line">     <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// more concisely</span></span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span> || root.val == val) &#123;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    TreeNode next;</span><br><span class="line">    <span class="keyword">if</span> (root.val &gt; val) &#123;</span><br><span class="line">        next = root.left;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        next = root.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> searchBST(next, val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Level-Traversal"><a href="#2-Level-Traversal" class="headerlink" title="2. Level Traversal"></a>2. Level Traversal</h4><p>The feature of binary search tree enables us not to rely on a queue. Just go left or right</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Level Traversal</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> TreeNode <span class="title function_">searchBST</span><span class="params">(TreeNode root, <span class="type">int</span> val)</span> &#123;</span><br><span class="line">    <span class="comment">// We must fully utilize binary search tree</span></span><br><span class="line">    <span class="comment">// if val is bigger than root&#x27;s value, we go left</span></span><br><span class="line">    <span class="comment">// else we go right</span></span><br><span class="line">    <span class="keyword">while</span> (root != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root.val &gt; val) &#123;</span><br><span class="line">            root = root.left;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root.val &lt; val)&#123;</span><br><span class="line">            root = root.right;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="98-Validate-Binary-Search-Tree"><a href="#98-Validate-Binary-Search-Tree" class="headerlink" title="98. Validate Binary Search Tree"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/">98. Validate Binary Search Tree</a></h2><h3 id="Intro-3"><a href="#Intro-3" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary tree, determine if it is a valid binary search tree (BST).</p>
+<p>A valid BST is defined as follows:</p>
+<p>- </p>
+<p>  The left subtree of a node contains only nodes with keys less than the node’s key.</p>
+<p>- </p>
+<p>  The right subtree of a node contains only nodes with keys greater than the node’s key.</p>
+<p>- </p>
+<p>  Both the left and right subtrees must also be binary search trees.</p>
+<h3 id="Solution-3"><a href="#Solution-3" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Recursion-Inorder"><a href="#1-Recursion-Inorder" class="headerlink" title="1.Recursion + Inorder"></a>1.Recursion + Inorder</h4><p>From left to middle to right, the binary search tree can be seen as an ascending order array, which means we can set a benchmark value and do an inorder recursion to see if the current node’s value is bigger than benchmark. If it is, then return true and update benchmark with node’s value, otherwise return false.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The benchmark value</span></span><br><span class="line"><span class="type">long</span> <span class="variable">value</span> <span class="operator">=</span> Long.MIN_VALUE;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Recursion + Inorder</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isValidBST</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    <span class="comment">// 1.First we confirm returned value and params</span></span><br><span class="line">    <span class="comment">//      boolean isValidBST(TreeNode root)</span></span><br><span class="line">    <span class="comment">// 2.Then we confirm end conditions</span></span><br><span class="line">    <span class="comment">//      if (root == null) &#123;return true&#125;</span></span><br><span class="line">    <span class="comment">// 3.Finally, we confirm logic</span></span><br><span class="line">    <span class="comment">//  We follow the order of left, middle and right.</span></span><br><span class="line">    <span class="comment">//  When it is middle, we do comparison with value and current node&#x27;s val.</span></span><br><span class="line">    <span class="comment">//  If value is smaller, then we update it with current node&#x27;s val</span></span><br><span class="line">    <span class="comment">//  Otherwise, we return false</span></span><br><span class="line">    <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">left</span> <span class="operator">=</span> isValidBST(root.left);</span><br><span class="line">    <span class="keyword">if</span> (root.val &lt;= value) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    value = root.val;</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">right</span> <span class="operator">=</span> isValidBST(root.right);</span><br><span class="line">    <span class="keyword">return</span> left &amp;&amp; right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Recursion/" rel="tag"># Recursion</a>
+              <a href="/tags/Binary-Tree/" rel="tag"># Binary_Tree</a>
+              <a href="/tags/DFS/" rel="tag"># DFS</a>
+              <a href="/tags/Level-Traversal/" rel="tag"># Level_Traversal</a>
+              <a href="/tags/BFS/" rel="tag"># BFS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/07/Day18-Binary-Tree-Part05/" rel="prev" title="Day18 Binary Tree Part05">
+      <i class="fa fa-chevron-left"></i> Day18 Binary Tree Part05
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day20-Binary-Tree-Part06"><span class="nav-number">1.</span> <span class="nav-text">Day20 Binary Tree Part06</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#654-Maximum-Binary-Tree"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">654. Maximum Binary Tree</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">1.0.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">1.0.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Recursion"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">1.Recursion</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#617-Merge-Two-Binary-Trees"><span class="nav-number">1.1.</span> <span class="nav-text">617. Merge Two Binary Trees</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-1"><span class="nav-number">1.1.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-number">1.1.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Level-Traversal"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">1.Level Traversal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Recursion-Preorder"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">2. Recursion + Preorder</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#700-Search-in-a-Binary-Search-Tree"><span class="nav-number">1.2.</span> <span class="nav-text">700. Search in a Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-2"><span class="nav-number">1.2.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2"><span class="nav-number">1.2.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Recursion-1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">1.Recursion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Level-Traversal"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2. Level Traversal</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#98-Validate-Binary-Search-Tree"><span class="nav-number">1.3.</span> <span class="nav-text">98. Validate Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-3"><span class="nav-number">1.3.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-3"><span class="nav-number">1.3.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Recursion-Inorder"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">1.Recursion + Inorder</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhao Yiwei"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhao Yiwei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhaoYiwei0311" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoYiwei0311" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaoyiwei0311@gmail.com" title="E-Mail → mailto:zhaoyiwei0311@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhao Yiwei</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">115k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">1:45</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
