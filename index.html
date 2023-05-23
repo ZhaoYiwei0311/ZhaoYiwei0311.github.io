@@ -183,6 +183,357 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/Day34-Greedy-Part04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/23/Day34-Greedy-Part04/" class="post-title-link" itemprop="url">Day34 Greedy Part04</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-23 23:16:40 / Modified: 23:17:01" itemprop="dateCreated datePublished" datetime="2023-05-23T23:16:40+08:00">2023-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="860-Lemonade-Change"><a href="#860-Lemonade-Change" class="headerlink" title="860. Lemonade Change"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lemonade-change/">860. Lemonade Change</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>At a lemonade stand, each lemonade costs $5. Customers are standing in a queue to buy from you and order one at a time (in the order specified by bills). Each customer will only buy one lemonade and pay with either a $5, $10, or $20 bill. You must provide the correct change to each customer so that the net transaction is that the customer pays $5.</p>
+<p>Note that you do not have any change in hand at first.</p>
+<p>Given an integer array bills where bills[i] is the bill the ith customer pays, return true if you can provide every customer with the correct change, or false otherwise.</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Greedy"><a href="#1-Greedy" class="headerlink" title="1.Greedy"></a>1.Greedy</h4><p>There are 3 cases.</p>
+<ol>
+<li><p>When customer pays with 5, just add 5 as our backup.</p>
+</li>
+<li><p>When customer pays with 10, return false if there is no 5 left or give out 1 * 5 and get 1 * 10 as backup.</p>
+</li>
+<li><p>When customer pays with 20, we have two strategies if supply is enough. </p>
+<ol>
+<li>1 * 10 and 1 * 5</li>
+<li>3 * 5</li>
+</ol>
+<p>And obviously, the local optimal would be 1 because <strong>10 is less useful than 5</strong></p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Greedy</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">lemonadeChange</span><span class="params">(<span class="type">int</span>[] bills)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">five</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">ten</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; bills.length; i++) &#123;</span><br><span class="line">        <span class="comment">// 1.Customer pays with 5, just add 5 backup</span></span><br><span class="line">        <span class="keyword">if</span> (bills[i] == <span class="number">5</span>) &#123;</span><br><span class="line">            five++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 2.Customer pays with 10, give out 5 if there is sufficient 5 and</span></span><br><span class="line">        <span class="comment">// add 10 backup, or return false</span></span><br><span class="line">        <span class="keyword">if</span> (bills[i] == <span class="number">10</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (five &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                five--;</span><br><span class="line">                ten++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 3.Customer pays with 20, we have 2 strategies here</span></span><br><span class="line">        <span class="comment">// But 10 + 5 should be priority since 10 is less useful</span></span><br><span class="line">        <span class="keyword">if</span> (bills[i] == <span class="number">20</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ten &gt; <span class="number">0</span> &amp;&amp; five &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                ten--;</span><br><span class="line">                five--;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ten &lt;= <span class="number">0</span> &amp;&amp; five &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">                five -= <span class="number">3</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="406-Queue-Reconstruction-by-Height"><a href="#406-Queue-Reconstruction-by-Height" class="headerlink" title="406. Queue Reconstruction by Height"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/queue-reconstruction-by-height/">406. Queue Reconstruction by Height</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>You are given an array of people, people, which are the attributes of some people in a queue (not necessarily in order). Each people[i] &#x3D; [hi, ki] represents the ith person of height hi with exactly ki other people in front who have a height greater than or equal to hi.</p>
+<p>Reconstruct and return the queue that is represented by the input array people. The returned queue should be formatted as an array queue, where queue[j] &#x3D; [hj, kj] is the attributes of the jth person in the queue (queue[0] is the person at the front of the queue).</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Greedy-1"><a href="#1-Greedy-1" class="headerlink" title="1.Greedy"></a>1.Greedy</h4><p>Similar to [[Day33 Greedy Part03#^26caed|135.Candy]], this question asks us to only consider <strong>only one side once</strong>.</p>
+<p>We can choose to sort by height first, or by queue number first. But the latter lead to nothing but chaos, so we choose to sort by height first.</p>
+<p>Suppose we have [7,0], [4,4], [7,1], [5,0], [6,1], [5,2]</p>
+<ol>
+<li><p>Sort by height <strong>desc</strong> and if height is same, the one with smaller order is in the front.</p>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">7,0</td>
+<td align="center">7,1</td>
+<td align="center">6,1</td>
+<td align="center">5,0</td>
+<td align="center">5,2</td>
+<td align="center">4,4</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>Insert one by one, now the order is where the element should be put.</p>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">7,0</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">7,0</td>
+<td align="center">7,1</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">7,0</td>
+<td align="center"><strong>6,1</strong></td>
+<td align="center"><strong>7,1</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>5,0</strong></td>
+<td align="center"><strong>7,0</strong></td>
+<td align="center">6,1</td>
+<td align="center">7,1</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">5,0</td>
+<td align="center">7,0</td>
+<td align="center"><strong>5,2</strong></td>
+<td align="center">6,1</td>
+<td align="center">7,1</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">0</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">5,0</td>
+<td align="center">7,0</td>
+<td align="center">5,2</td>
+<td align="center">6,1</td>
+<td align="center"><strong>4,4</strong></td>
+<td align="center"><strong>7,1</strong></td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Greedy</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span>[][] reconstructQueue(<span class="type">int</span>[][] people) &#123;</span><br><span class="line">    <span class="comment">// 1.First sort people by their height in desc</span></span><br><span class="line">    <span class="comment">// and if height is same, sort by order asc</span></span><br><span class="line">    Arrays.sort(people, (a, b) -&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[<span class="number">0</span>] == b[<span class="number">0</span>]) &#123;</span><br><span class="line">            <span class="keyword">return</span> a[<span class="number">1</span>] - b[<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> b[<span class="number">0</span>] - a[<span class="number">0</span>];</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// We can use a linked list to insert element</span></span><br><span class="line">    LinkedList&lt;<span class="type">int</span>[]&gt; list = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// add API can add according to index, which is just element&#x27;s order</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span>[] person : people) &#123;</span><br><span class="line">        list.add(person[<span class="number">1</span>], person);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> list.toArray(<span class="keyword">new</span> <span class="title class_">int</span>[people.length][]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="452-Minimum-Number-of-Arrows-to-Burst-Balloons"><a href="#452-Minimum-Number-of-Arrows-to-Burst-Balloons" class="headerlink" title="452. Minimum Number of Arrows to Burst Balloons"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">452. Minimum Number of Arrows to Burst Balloons</a></h2><h3 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h3><p>There are some spherical balloons taped onto a flat wall that represents the XY-plane. The balloons are represented as a 2D integer array points where points[i] &#x3D; [xstart, xend] denotes a balloon whose horizontal diameter stretches between xstart and xend. You do not know the exact y-coordinates of the balloons.</p>
+<p>Arrows can be shot up directly vertically (in the positive y-direction) from different points along the x-axis. A balloon with xstart and xend is burst by an arrow shot at x if xstart &lt;&#x3D; x &lt;&#x3D; xend. There is no limit to the number of arrows that can be shot. A shot arrow keeps traveling up infinitely, bursting any balloons in its path.</p>
+<p>Given the array points, return the minimum number of arrows that must be shot to burst all balloons.</p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-Greedy-2"><a href="#1-Greedy-2" class="headerlink" title="1.Greedy"></a>1.Greedy</h4><p>Shoot as many overlapped balloons as possible. </p>
+<p>One point here is the boarder. It can be either left boarder or right boarder that we should stick to and I would choose right boarder.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Greedy</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">findMinArrowShots</span><span class="params">(<span class="type">int</span>[][] points)</span> &#123;</span><br><span class="line">    <span class="comment">// First we must sort array by its left boarder</span></span><br><span class="line">    <span class="comment">// Pay attention to the compare method we use because there might be overflow</span></span><br><span class="line">    Arrays.sort(points, (a, b) -&gt; Integer.compare(a[<span class="number">0</span>], b[<span class="number">0</span>]));</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">boarder</span> <span class="operator">=</span> points[<span class="number">0</span>][<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; points.length; i++) &#123;</span><br><span class="line">        <span class="comment">// Two cases we might come up with</span></span><br><span class="line">        <span class="keyword">if</span> (points[i][<span class="number">0</span>] &gt; boarder) &#123;</span><br><span class="line">            <span class="comment">// 1.The left boarder of current element surpasses our set boarder</span></span><br><span class="line">            <span class="comment">//  In this case we need to add arrow</span></span><br><span class="line">            count++;</span><br><span class="line">            boarder = points[i][<span class="number">1</span>];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 2.The left boarder of current element is below our set boarder</span></span><br><span class="line">            <span class="comment">//  In this case, the arrow can shoot through, but we might truncate</span></span><br><span class="line">            <span class="comment">//  our boarder accordingly</span></span><br><span class="line">            boarder = Math.min(boarder, points[i][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/Day33-Greedy-Part03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/23/Day33-Greedy-Part03/" class="post-title-link" itemprop="url">Day33 Greedy Part03</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-23 20:40:51 / Modified: 20:41:41" itemprop="dateCreated datePublished" datetime="2023-05-23T20:40:51+08:00">2023-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>5.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1005-Maximize-Sum-Of-Array-After-K-Negations"><a href="#1005-Maximize-Sum-Of-Array-After-K-Negations" class="headerlink" title="1005. Maximize Sum Of Array After K Negations"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/">1005. Maximize Sum Of Array After K Negations</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given an integer array nums and an integer k, modify the array in the following way:</p>
+<p>choose an index i and replace nums[i] with -nums[i].<br>You should apply this process exactly k times. You may choose the same index i multiple times.</p>
+<p>Return the largest possible sum of the array after modifying it in this way.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/23/Day33-Greedy-Part03/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/Day32-Greedy-Part02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -518,7 +869,7 @@
       
           <h2 id="93-Restore-IP-Addresses"><a href="#93-Restore-IP-Addresses" class="headerlink" title="93. Restore IP Addresses"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/">93. Restore IP Addresses</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.</p>
 <ul>
-<li>For example, “0.1.2.201” and “192.168.1.1” are valid IP addresses, but “0.011.255.245”, “192.168.1.312” and “<a href="mailto:&#49;&#57;&#x32;&#46;&#x31;&#54;&#56;&#x40;&#49;&#x2e;&#49;">&#49;&#57;&#x32;&#46;&#x31;&#54;&#56;&#x40;&#49;&#x2e;&#49;</a>“ are invalid IP addresses.</li>
+<li>For example, “0.1.2.201” and “192.168.1.1” are valid IP addresses, but “0.011.255.245”, “192.168.1.312” and “<a href="mailto:&#x31;&#57;&#x32;&#46;&#x31;&#54;&#x38;&#64;&#49;&#x2e;&#x31;">&#x31;&#57;&#x32;&#46;&#x31;&#54;&#x38;&#64;&#49;&#x2e;&#x31;</a>“ are invalid IP addresses.</li>
 </ul>
 <p>Given a string s containing only digits, return all possible valid IP addresses that can be formed by inserting dots into s. You are not allowed to reorder or remove any digits in s. You may return the valid IP addresses in any order.</p>
           <!--noindex-->
@@ -858,7 +1209,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-15 12:24:43" itemprop="dateModified" datetime="2023-05-15T12:24:43+08:00">2023-05-15</time>
+                <time title="Modified: 2023-05-23 20:41:13" itemprop="dateModified" datetime="2023-05-23T20:41:13+08:00">2023-05-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -900,185 +1251,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/05/12/Day23-Binary-Tree-Part09/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/10/Day22-Binary-Tree-Part08/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhao Yiwei">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My_Study_Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/10/Day22-Binary-Tree-Part08/" class="post-title-link" itemprop="url">Day22 Binary Tree Part08</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-05-10 19:33:27 / Modified: 19:33:59" itemprop="dateCreated datePublished" datetime="2023-05-10T19:33:27+08:00">2023-05-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>7.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>7 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><a href="#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree" class="headerlink" title="235. Lowest Common Ancestor of a Binary Search Tree"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/">235. Lowest Common Ancestor of a Binary Search Tree</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.</p>
-<p>According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/10/Day22-Binary-Tree-Part08/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/09/Day21-Binary-Tree-Part07/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhao Yiwei">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My_Study_Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/09/Day21-Binary-Tree-Part07/" class="post-title-link" itemprop="url">Day21 Binary Tree Part07</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-05-09 16:41:45 / Modified: 16:43:05" itemprop="dateCreated datePublished" datetime="2023-05-09T16:41:45+08:00">2023-05-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>7.6k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>7 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="530-Minimum-Absolute-Difference-in-BST"><a href="#530-Minimum-Absolute-Difference-in-BST" class="headerlink" title="530. Minimum Absolute Difference in BST"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/">530. Minimum Absolute Difference in BST</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two different nodes in the tree.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/09/Day21-Binary-Tree-Part07/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1169,7 +1341,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1226,12 +1398,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">165k</span>
+    <span title="Symbols count total">175k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:30</span>
+    <span title="Reading time total">2:39</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
