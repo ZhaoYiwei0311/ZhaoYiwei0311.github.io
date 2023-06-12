@@ -183,7 +183,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/15/Day27-Backtrack-Part03/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/28/Day39-Dynamic-Programming-Part02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -197,7 +197,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/05/15/Day27-Backtrack-Part03/" class="post-title-link" itemprop="url">Day27 Backtrack Part03</a>
+            <a href="/2023/05/28/Day39-Dynamic-Programming-Part02/" class="post-title-link" itemprop="url">Day39 Dynamic Programming Part02</a>
         </h2>
 
         <div class="post-meta">
@@ -207,14 +207,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2023-05-15 22:03:40" itemprop="dateCreated datePublished" datetime="2023-05-15T22:03:40+08:00">2023-05-15</time>
+              <time title="Created: 2023-05-28 22:56:56" itemprop="dateCreated datePublished" datetime="2023-05-28T22:56:56+10:00">2023-05-28</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-16 12:12:55" itemprop="dateModified" datetime="2023-05-16T12:12:55+08:00">2023-05-16</time>
+                <time title="Modified: 2023-05-29 00:58:02" itemprop="dateModified" datetime="2023-05-29T00:58:02+10:00">2023-05-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -232,14 +232,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>7.8k</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>7 mins.</span>
+              <span>3 mins.</span>
             </span>
 
         </div>
@@ -251,12 +251,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="39-Combination-Sum"><a href="#39-Combination-Sum" class="headerlink" title="39. Combination Sum"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum/">39. Combination Sum</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.</p>
-<p>The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.</p>
-<p>The test cases are generated such that the number of unique combinations that sum up to target is less than 150 combinations for the given input.</p>
+          <h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0] [0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1] [n - 1]). The robot can only move either down or right at any point in time.</p>
+<p>Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.</p>
+<p>The test cases are generated so that the answer will be less than or equal to 2 * 109.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/15/Day27-Backtrack-Part03/#more" rel="contents">
+              <a class="btn" href="/2023/05/28/Day39-Dynamic-Programming-Part02/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -280,7 +280,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/15/Day25-Backtrack-Part02/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/Day38-Dynamic-Programming-Part01/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -294,7 +294,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/05/15/Day25-Backtrack-Part02/" class="post-title-link" itemprop="url">Day25 Backtrack Part02</a>
+            <a href="/2023/05/26/Day38-Dynamic-Programming-Part01/" class="post-title-link" itemprop="url">Day38 Dynamic Programming Part01</a>
         </h2>
 
         <div class="post-meta">
@@ -305,7 +305,108 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-05-15 12:19:32 / Modified: 22:05:21" itemprop="dateCreated datePublished" datetime="2023-05-15T12:19:32+08:00">2023-05-15</time>
+              <time title="Created: 2023-05-26 01:30:07 / Modified: 03:30:48" itemprop="dateCreated datePublished" datetime="2023-05-26T01:30:07+10:00">2023-05-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Concept-Of-DP"><a href="#Concept-Of-DP" class="headerlink" title="Concept Of DP"></a>Concept Of DP</h2><p>Every status except for those initialized at the very beginning is deduced from previous status.</p>
+<h2 id="Template-Of-DP"><a href="#Template-Of-DP" class="headerlink" title="Template Of DP"></a>Template Of DP</h2><ol>
+<li><p>Confirm the meanings of DP table and its index</p>
+</li>
+<li><p>Confirm formula</p>
+</li>
+<li><p>Initialize DP table</p>
+</li>
+<li><p>Confirm iteration order</p>
+</li>
+<li><p>Create examples of DP table</p>
+</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/26/Day38-Dynamic-Programming-Part01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/Day37-Greedy-Part06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/25/Day37-Greedy-Part06/" class="post-title-link" itemprop="url">Day37 Greedy Part06</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-25 17:49:13 / Modified: 19:52:33" itemprop="dateCreated datePublished" datetime="2023-05-25T17:49:13+10:00">2023-05-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -342,755 +443,658 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="216-Combination-Sum-III"><a href="#216-Combination-Sum-III" class="headerlink" title="216. Combination Sum III"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iii/">216. Combination Sum III</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Find all valid combinations of k numbers that sum up to n such that the following conditions are true:</p>
+          <h2 id="738-Monotone-Increasing-Digits"><a href="#738-Monotone-Increasing-Digits" class="headerlink" title="738. Monotone Increasing Digits"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/monotone-increasing-digits/">738. Monotone Increasing Digits</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>An integer has monotone increasing digits if and only if each pair of adjacent digits x and y satisfy x &lt;&#x3D; y.</p>
+<p>Given an integer n, return the largest number that is less than or equal to n with monotone increasing digits.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/25/Day37-Greedy-Part06/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/Day36-Greedy-Part05/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/24/Day36-Greedy-Part05/" class="post-title-link" itemprop="url">Day36 Greedy Part05</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-24 11:23:06 / Modified: 13:27:07" itemprop="dateCreated datePublished" datetime="2023-05-24T11:23:06+10:00">2023-05-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="435-Non-overlapping-Intervals"><a href="#435-Non-overlapping-Intervals" class="headerlink" title="435. Non-overlapping Intervals"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-overlapping-intervals/">435. Non-overlapping Intervals</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given an array of intervals intervals where intervals[i] &#x3D; [starti, endi], return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/24/Day36-Greedy-Part05/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/Day35-Greedy-Part04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/23/Day35-Greedy-Part04/" class="post-title-link" itemprop="url">Day35 Greedy Part04</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-23 23:16:40" itemprop="dateCreated datePublished" datetime="2023-05-23T23:16:40+10:00">2023-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-24 01:23:36" itemprop="dateModified" datetime="2023-05-24T01:23:36+10:00">2023-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="860-Lemonade-Change"><a href="#860-Lemonade-Change" class="headerlink" title="860. Lemonade Change"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lemonade-change/">860. Lemonade Change</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>At a lemonade stand, each lemonade costs $5. Customers are standing in a queue to buy from you and order one at a time (in the order specified by bills). Each customer will only buy one lemonade and pay with either a $5, $10, or $20 bill. You must provide the correct change to each customer so that the net transaction is that the customer pays $5.</p>
+<p>Note that you do not have any change in hand at first.</p>
+<p>Given an integer array bills where bills[i] is the bill the ith customer pays, return true if you can provide every customer with the correct change, or false otherwise.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/23/Day35-Greedy-Part04/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/Day34-Greedy-Part03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/23/Day34-Greedy-Part03/" class="post-title-link" itemprop="url">Day34 Greedy Part03</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2023-05-23 20:40:51" itemprop="dateCreated datePublished" datetime="2023-05-23T20:40:51+10:00">2023-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-05-24 01:23:23" itemprop="dateModified" datetime="2023-05-24T01:23:23+10:00">2023-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>5.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>5 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1005-Maximize-Sum-Of-Array-After-K-Negations"><a href="#1005-Maximize-Sum-Of-Array-After-K-Negations" class="headerlink" title="1005. Maximize Sum Of Array After K Negations"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/">1005. Maximize Sum Of Array After K Negations</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given an integer array nums and an integer k, modify the array in the following way:</p>
+<p>choose an index i and replace nums[i] with -nums[i].<br>You should apply this process exactly k times. You may choose the same index i multiple times.</p>
+<p>Return the largest possible sum of the array after modifying it in this way.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/23/Day34-Greedy-Part03/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/Day32-Greedy-Part02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/23/Day32-Greedy-Part02/" class="post-title-link" itemprop="url">Day32 Greedy Part02</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-23 15:45:11 / Modified: 17:45:42" itemprop="dateCreated datePublished" datetime="2023-05-23T15:45:11+10:00">2023-05-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="122-Best-Time-to-Buy-and-Sell-Stock-II"><a href="#122-Best-Time-to-Buy-and-Sell-Stock-II" class="headerlink" title="122. Best Time to Buy and Sell Stock II"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">122. Best Time to Buy and Sell Stock II</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>You are given an integer array prices where prices[i] is the price of a given stock on the ith day.</p>
+<p>On each day, you may decide to buy and&#x2F;or sell the stock. You can only hold at most one share of the stock at any time. However, you can buy it then immediately sell it on the same day.</p>
+<p>Find and return the maximum profit you can achieve.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/23/Day32-Greedy-Part02/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/19/Day31-Greedy-Part01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/19/Day31-Greedy-Part01/" class="post-title-link" itemprop="url">Day31 Greedy Part01</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-19 16:18:55 / Modified: 18:19:34" itemprop="dateCreated datePublished" datetime="2023-05-19T16:18:55+10:00">2023-05-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Concept-of-Greedy-Algorithm"><a href="#Concept-of-Greedy-Algorithm" class="headerlink" title="Concept of Greedy Algorithm"></a>Concept of Greedy Algorithm</h2><p>The essence of greedy algorithm is <strong>“From local optima to global optima”</strong>.</p>
+<h2 id="455-Assign-Cookies"><a href="#455-Assign-Cookies" class="headerlink" title="455. Assign Cookies"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/assign-cookies/">455. Assign Cookies</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie.</p>
+<p>Each child i has a greed factor g[i], which is the minimum size of a cookie that the child will be content with; and each cookie j has a size s[j]. If s[j] &gt;&#x3D; g[i], we can assign the cookie j to the child i, and the child i will be content. Your goal is to maximize the number of your content children and output the maximum number.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/19/Day31-Greedy-Part01/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/19/Day29-Backtrack-Part05/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/19/Day29-Backtrack-Part05/" class="post-title-link" itemprop="url">Day29 Backtrack Part05</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-19 12:06:26 / Modified: 16:44:52" itemprop="dateCreated datePublished" datetime="2023-05-19T12:06:26+10:00">2023-05-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="491-Non-decreasing-Subsequences"><a href="#491-Non-decreasing-Subsequences" class="headerlink" title="491. Non-decreasing Subsequences"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-decreasing-subsequences/">491. Non-decreasing Subsequences</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given an integer array nums, return all the different possible non-decreasing subsequences of the given array with at least two elements. You may return the answer in any order.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/05/19/Day29-Backtrack-Part05/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/16/Day28-Backtrack-Part04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/16/Day28-Backtrack-Part04/" class="post-title-link" itemprop="url">Day28 Backtrack Part04</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-05-16 12:11:04 / Modified: 14:16:55" itemprop="dateCreated datePublished" datetime="2023-05-16T12:11:04+10:00">2023-05-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="93-Restore-IP-Addresses"><a href="#93-Restore-IP-Addresses" class="headerlink" title="93. Restore IP Addresses"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/">93. Restore IP Addresses</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.</p>
 <ul>
-<li>Only numbers 1 through 9 are used.</li>
-<li>Each number is used at most once.</li>
+<li>For example, “0.1.2.201” and “192.168.1.1” are valid IP addresses, but “0.011.255.245”, “192.168.1.312” and “<a href="mailto:&#x31;&#57;&#50;&#46;&#49;&#54;&#x38;&#64;&#x31;&#46;&#x31;">&#x31;&#57;&#50;&#46;&#49;&#54;&#x38;&#64;&#x31;&#46;&#x31;</a>“ are invalid IP addresses.</li>
 </ul>
-<p>Return a list of all possible valid combinations. The list must not contain the same combination twice, and the combinations may be returned in any order.</p>
+<p>Given a string s containing only digits, return all possible valid IP addresses that can be formed by inserting dots into s. You are not allowed to reorder or remove any digits in s. You may return the valid IP addresses in any order.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/05/15/Day25-Backtrack-Part02/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/15/Day24-Backtrack-Part01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhao Yiwei">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My_Study_Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/15/Day24-Backtrack-Part01/" class="post-title-link" itemprop="url">Day24 Backtrack Part01</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-05-15 12:16:24 / Modified: 22:05:17" itemprop="dateCreated datePublished" datetime="2023-05-15T12:16:24+08:00">2023-05-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Concept-of-Backtrack"><a href="#Concept-of-Backtrack" class="headerlink" title="Concept of Backtrack"></a>Concept of Backtrack</h2><p>Backtrack is an algorithm that enumerates all possible results in a violent way, which means it is not quite efficient, but we have to use it in some cases because there are no better solutions.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/15/Day24-Backtrack-Part01/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/12/Day23-Binary-Tree-Part09/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhao Yiwei">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My_Study_Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/12/Day23-Binary-Tree-Part09/" class="post-title-link" itemprop="url">Day23 Binary Tree Part09</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-12 22:10:52" itemprop="dateCreated datePublished" datetime="2023-05-12T22:10:52+08:00">2023-05-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-23 20:41:13" itemprop="dateModified" datetime="2023-05-23T20:41:13+08:00">2023-05-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>5.3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>5 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="669-Trim-a-Binary-Search-Tree"><a href="#669-Trim-a-Binary-Search-Tree" class="headerlink" title="669. Trim a Binary Search Tree"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trim-a-binary-search-tree/">669. Trim a Binary Search Tree</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary search tree and the lowest and highest boundaries as low and high, trim the tree so that all its elements lies in [low, high]. Trimming the tree should not change the relative structure of the elements that will remain in the tree (i.e., any node’s descendant should remain a descendant). It can be proven that there is a unique answer.</p>
-<p>Return the root of the trimmed binary search tree. Note that the root may change depending on the given bounds.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/12/Day23-Binary-Tree-Part09/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/10/Day22-Binary-Tree-Part08/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhao Yiwei">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My_Study_Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/10/Day22-Binary-Tree-Part08/" class="post-title-link" itemprop="url">Day22 Binary Tree Part08</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-05-10 19:33:27 / Modified: 19:33:59" itemprop="dateCreated datePublished" datetime="2023-05-10T19:33:27+08:00">2023-05-10</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>7.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>7 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><a href="#235-Lowest-Common-Ancestor-of-a-Binary-Search-Tree" class="headerlink" title="235. Lowest Common Ancestor of a Binary Search Tree"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/">235. Lowest Common Ancestor of a Binary Search Tree</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.</p>
-<p>According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/10/Day22-Binary-Tree-Part08/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/09/Day21-Binary-Tree-Part07/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhao Yiwei">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My_Study_Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/09/Day21-Binary-Tree-Part07/" class="post-title-link" itemprop="url">Day21 Binary Tree Part07</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-05-09 16:41:45 / Modified: 16:43:05" itemprop="dateCreated datePublished" datetime="2023-05-09T16:41:45+08:00">2023-05-09</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>7.6k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>7 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="530-Minimum-Absolute-Difference-in-BST"><a href="#530-Minimum-Absolute-Difference-in-BST" class="headerlink" title="530. Minimum Absolute Difference in BST"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/">530. Minimum Absolute Difference in BST</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two different nodes in the tree.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/09/Day21-Binary-Tree-Part07/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/08/Day20-Binary-Tree-Part06/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhao Yiwei">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My_Study_Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/08/Day20-Binary-Tree-Part06/" class="post-title-link" itemprop="url">Day20 Binary Tree Part06</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-08 19:04:24" itemprop="dateCreated datePublished" datetime="2023-05-08T19:04:24+08:00">2023-05-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-09 16:43:01" itemprop="dateModified" datetime="2023-05-09T16:43:01+08:00">2023-05-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>7.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>7 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="654-Maximum-Binary-Tree"><a href="#654-Maximum-Binary-Tree" class="headerlink" title="654. Maximum Binary Tree"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-binary-tree/">654. Maximum Binary Tree</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>You are given an integer array nums with no duplicates. A maximum binary tree can be built recursively from nums using the following algorithm:</p>
-<ol>
-<li>Create a root node whose value is the maximum value in nums.</li>
-<li>Recursively build the left subtree on the subarray prefix to the left of the maximum value.</li>
-<li>Recursively build the right subtree on the subarray suffix to the right of the maximum value.</li>
-</ol>
-<p>Return the maximum binary tree built from nums.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/08/Day20-Binary-Tree-Part06/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/07/Day18-Binary-Tree-Part05/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhao Yiwei">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My_Study_Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/07/Day18-Binary-Tree-Part05/" class="post-title-link" itemprop="url">Day18 Binary Tree Part05</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-05-07 14:15:12 / Modified: 14:18:27" itemprop="dateCreated datePublished" datetime="2023-05-07T14:15:12+08:00">2023-05-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>9.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>9 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="513-Find-Bottom-Left-Tree-Value"><a href="#513-Find-Bottom-Left-Tree-Value" class="headerlink" title="513. Find Bottom Left Tree Value"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">513. Find Bottom Left Tree Value</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary tree, return the leftmost value in the last row of the tree.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/07/Day18-Binary-Tree-Part05/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/05/Day17-Binary-Tree-Part04/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhao Yiwei">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My_Study_Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/05/Day17-Binary-Tree-Part04/" class="post-title-link" itemprop="url">Day17 Binary Tree Part04</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2023-05-05 16:48:18 / Modified: 16:50:45" itemprop="dateCreated datePublished" datetime="2023-05-05T16:48:18+08:00">2023-05-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>5.5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>5 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="110-Balanced-Binary-Tree"><a href="#110-Balanced-Binary-Tree" class="headerlink" title="110. Balanced Binary Tree"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/balanced-binary-tree/">110. Balanced Binary Tree</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given a binary tree, determine if it is <strong>height-balanced</strong>.</p>
-<p>Height-balanced means the absolute height difference between left and right subtrees should not surpass 1.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/05/Day17-Binary-Tree-Part04/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/04/Day16-Binary-Tree-Part03/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhao Yiwei">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My_Study_Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/04/Day16-Binary-Tree-Part03/" class="post-title-link" itemprop="url">Day16 Binary Tree Part03</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2023-05-04 21:39:59" itemprop="dateCreated datePublished" datetime="2023-05-04T21:39:59+08:00">2023-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-05-05 16:50:30" itemprop="dateModified" datetime="2023-05-05T16:50:30+08:00">2023-05-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>7.7k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>7 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="104-Maximum-Depth-of-Binary-Tree"><a href="#104-Maximum-Depth-of-Binary-Tree" class="headerlink" title="104. Maximum Depth of Binary Tree"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">104. Maximum Depth of Binary Tree</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given the root of a binary tree, return its maximum depth.</p>
-<p>A binary tree’s maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/04/Day16-Binary-Tree-Part03/#more" rel="contents">
+              <a class="btn" href="/2023/05/16/Day28-Backtrack-Part04/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1113,7 +1117,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1181,7 +1185,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1194,7 +1198,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1238,12 +1242,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">188k</span>
+    <span title="Symbols count total">221k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">2:51</span>
+    <span title="Reading time total">3:21</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>

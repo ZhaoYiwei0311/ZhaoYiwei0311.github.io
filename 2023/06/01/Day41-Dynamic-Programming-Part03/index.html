@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="343. Integer BreakIntroGiven an integer n, break it into the sum of k positive integers, where k &gt;&#x3D; 2, and maximize the product of those integers. Return the maximum product you can get.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day41 Dynamic Programming Part03">
+<meta property="og:url" content="http://example.com/2023/06/01/Day41-Dynamic-Programming-Part03/index.html">
+<meta property="og:site_name" content="My_Study_Blog">
+<meta property="og:description" content="343. Integer BreakIntroGiven an integer n, break it into the sum of k positive integers, where k &gt;&#x3D; 2, and maximize the product of those integers. Return the maximum product you can get.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.postimg.cc/mhxmvDzy/Day-40-Dynamic-Programming-Part03-01.jpg">
+<meta property="og:image" content="https://i.postimg.cc/52bhy7yq/Day-40-Dynamic-Programming-Part03-02.jpg">
+<meta property="og:image" content="https://i.postimg.cc/1X7k8NL6/Day-40-Dynamic-Programming-Part03-03.jpg">
+<meta property="article:published_time" content="2023-06-01T10:30:39.000Z">
+<meta property="article:modified_time" content="2023-06-01T12:35:49.227Z">
+<meta property="article:author" content="Zhao Yiwei">
+<meta property="article:tag" content="Binary_Tree">
+<meta property="article:tag" content="DP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.postimg.cc/mhxmvDzy/Day-40-Dynamic-Programming-Part03-01.jpg">
+
+<link rel="canonical" href="http://example.com/2023/06/01/Day41-Dynamic-Programming-Part03/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Day41 Dynamic Programming Part03 | My_Study_Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">My_Study_Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/01/Day41-Dynamic-Programming-Part03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhao Yiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My_Study_Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Day41 Dynamic Programming Part03
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-06-01 20:30:39 / Modified: 22:35:49" itemprop="dateCreated datePublished" datetime="2023-06-01T20:30:39+10:00">2023-06-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3.2k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="343-Integer-Break"><a href="#343-Integer-Break" class="headerlink" title="343. Integer Break"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/integer-break/">343. Integer Break</a></h2><h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>Given an integer n, break it into the sum of k positive integers, where k &gt;&#x3D; 2, and maximize the product of those integers.</p>
+<p>Return the maximum product you can get.</p>
+<span id="more"></span>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-DP"><a href="#1-DP" class="headerlink" title="1.DP"></a>1.DP</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * DP</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">integerBreak</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// 1.Confirm the meanings of DP table and its index</span></span><br><span class="line">    <span class="comment">//  The element of array means the maximum product of this integer broken</span></span><br><span class="line">    <span class="comment">// 2.Confirm formula</span></span><br><span class="line">    <span class="comment">//  We do iteration in each integer n, there will be 2 solutions</span></span><br><span class="line">    <span class="comment">//  one is i * (n - i) and the other is i * table[n - i]</span></span><br><span class="line">    <span class="comment">//  i * (n - i) can be seen as the product of two numbers</span></span><br><span class="line">    <span class="comment">//  i * table[n - i] can be seen as the product of multiple numbers</span></span><br><span class="line">    <span class="comment">//  We compare which is bigger and update table[i]</span></span><br><span class="line">    <span class="comment">//  dp[n] = Math.max(dp[n], Math.max(i * dp[n - i], i * (n - 1)))</span></span><br><span class="line">    <span class="comment">// 3.Initialize DP table</span></span><br><span class="line">    <span class="comment">// dp[1] = 1 and dp[2] = 1</span></span><br><span class="line">    <span class="comment">// 4.Confirm iteration order</span></span><br><span class="line">    <span class="comment">//  From left to right</span></span><br><span class="line">    <span class="type">int</span>[] table = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    table[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    table[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> table[n];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">3</span>; i &lt; table.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= i / <span class="number">2</span> + <span class="number">1</span>; j++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp1</span> <span class="operator">=</span> j * table[i - j];</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp2</span> <span class="operator">=</span> j * (i - j);</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> Math.max(temp1, temp2);</span><br><span class="line">            table[i] = Math.max(temp, table[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> table[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-Greedy"><a href="#2-Greedy" class="headerlink" title="2.Greedy"></a>2.Greedy</h4><p>It seems that with most 3, we can get the greatest product.</p>
+<p>But no strict proof I can offer.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Greedy</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">integerBreak</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">4</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">4</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// in the example of 10, 3 * 3 * 4 is the correct answer</span></span><br><span class="line">    <span class="comment">// And it seems that the last element would be better 4 rather than 3</span></span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">4</span>) &#123;</span><br><span class="line">        ans *= <span class="number">3</span>;</span><br><span class="line">        n -= <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ans *= n;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="96-Unique-Binary-Search-Trees"><a href="#96-Unique-Binary-Search-Trees" class="headerlink" title="96. Unique Binary Search Trees"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-binary-search-trees/">96. Unique Binary Search Trees</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>Given an integer n, return the number of structurally unique BST’s (binary search trees) which has exactly n nodes of unique values from 1 to n.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-DP-1"><a href="#1-DP-1" class="headerlink" title="1.DP"></a>1.DP</h4><p>For n &#x3D;&#x3D; 1, we have 1 result</p>
+<p>​	<a target="_blank" rel="noopener" href="https://postimg.cc/p5ZQ8PBm"><img src="https://i.postimg.cc/mhxmvDzy/Day-40-Dynamic-Programming-Part03-01.jpg" alt="Day-40-Dynamic-Programming-Part03-01.jpg"></a></p>
+<p>For n &#x3D;&#x3D; 2, we have 2 results</p>
+<p><a target="_blank" rel="noopener" href="https://postimg.cc/rKZnY9SK"><img src="https://i.postimg.cc/52bhy7yq/Day-40-Dynamic-Programming-Part03-02.jpg" alt="Day-40-Dynamic-Programming-Part03-02.jpg"></a></p>
+<p>For n &#x3D;&#x3D; 3, we have 5 results</p>
+<p>​	<a target="_blank" rel="noopener" href="https://postimg.cc/YLgnVj2q"><img src="https://i.postimg.cc/1X7k8NL6/Day-40-Dynamic-Programming-Part03-03.jpg" alt="Day-40-Dynamic-Programming-Part03-03.jpg"></a></p>
+<p>But the point is when <strong>n &#x3D;&#x3D; 0</strong>, we have 1 result for it is also a BST.</p>
+<p>Still we take example of n &#x3D;&#x3D; 3.</p>
+<p>We can see that it can be divided into 3 parts: 1 as root, 2 as root and 3 as root. </p>
+<p>Firstly, we see 1 as root, its right subtree is the same shape as the case when n &#x3D;&#x3D; 2. But the result is more complicated because we must also take into account its left subtree which is actually the case <strong>n &#x3D;&#x3D; 0</strong>, and according to discrete mathematics, the result of 1 as root is dp[1 - 1] * dp[3 - 1].  it is “1 - 1” for it is BST. 1 - 1 refers to those are smaller than 1, and “3 - 1” refers to those are bigger than 1.</p>
+<p>Similarly, for 2 as root, it is dp[2 - 1] * dp[3 - 2]. For 3 as root, it is dp[3 - 1] * dp[3 - 3].</p>
+<p>Thus, we can see a formula that lies in iteration, which is dp[i] &#x3D; dp[i - 1] * dp[n - i].</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * DP</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">numTrees</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// 1.Confirm the meanings of DP table and its index</span></span><br><span class="line">    <span class="comment">//  The element of array means there are n types of BST tree</span></span><br><span class="line">    <span class="comment">// 2.Confirm formula</span></span><br><span class="line">    <span class="comment">//  It must be deduced from graph. We do an iteration of root</span></span><br><span class="line">    <span class="comment">//  And for the left subtree, there are all smaller nodes, while for the right</span></span><br><span class="line">    <span class="comment">//  one there are all bigger nodes</span></span><br><span class="line">    <span class="comment">//  According to discrete mathematics, we multiply both subtree and add this result</span></span><br><span class="line">    <span class="comment">//  to dp[n]</span></span><br><span class="line">    <span class="comment">//  for (int i = 1; i &lt;= n; i ++) &#123;dp[n] += dp[i - 1] * dp[n - i] &#125;</span></span><br><span class="line">    <span class="comment">// 3.Initialize DP table</span></span><br><span class="line">    <span class="comment">// dp[1] = 1</span></span><br><span class="line">    <span class="comment">// Also dp[0] is quite important, and it is 1 for it is BST</span></span><br><span class="line">    <span class="comment">// 4.Confirm iteration order</span></span><br><span class="line">    <span class="comment">//  From left to right</span></span><br><span class="line">    <span class="type">int</span>[] table = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// table[0] is important for it is also a BST</span></span><br><span class="line">    table[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    table[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt; table.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt;= i; j++) &#123;</span><br><span class="line">            table[i] += table[j - <span class="number">1</span>] * table[i - j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> table[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Binary-Tree/" rel="tag"># Binary_Tree</a>
+              <a href="/tags/DP/" rel="tag"># DP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/28/Day39-Dynamic-Programming-Part02/" rel="prev" title="Day39 Dynamic Programming Part02">
+      <i class="fa fa-chevron-left"></i> Day39 Dynamic Programming Part02
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/01/Day42-Dynamic-Programming-Part04/" rel="next" title="Day42 Dynamic Programming Part04">
+      Day42 Dynamic Programming Part04 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#343-Integer-Break"><span class="nav-number">1.</span> <span class="nav-text">343. Integer Break</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro"><span class="nav-number">1.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">1.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-DP"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.DP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Greedy"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.Greedy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#96-Unique-Binary-Search-Trees"><span class="nav-number">2.</span> <span class="nav-text">96. Unique Binary Search Trees</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-1"><span class="nav-number">2.1.</span> <span class="nav-text">Intro</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-number">2.2.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-DP-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.DP</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Zhao Yiwei"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Zhao Yiwei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ZhaoYiwei0311" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ZhaoYiwei0311" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:zhaoyiwei0311@gmail.com" title="E-Mail → mailto:zhaoyiwei0311@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhao Yiwei</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">221k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">3:21</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
