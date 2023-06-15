@@ -28,7 +28,7 @@
 <meta property="og:description" content="309. Best Time to Buy and Sell Stock with CooldownIntroYou are given an array prices where prices[i] is the price of a given stock on the ith day. Find the maximum profit you can achieve. You may comp">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-12T11:58:33.000Z">
-<meta property="article:modified_time" content="2023-06-12T11:59:42.885Z">
+<meta property="article:modified_time" content="2023-06-12T12:05:08.350Z">
 <meta property="article:author" content="Zhao Yiwei">
 <meta property="article:tag" content="DP">
 <meta property="article:tag" content="Stock_Problem">
@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-06-12 21:58:33 / Modified: 21:59:42" itemprop="dateCreated datePublished" datetime="2023-06-12T21:58:33+10:00">2023-06-12</time>
+              <time title="Created: 2023-06-12 21:58:33 / Modified: 22:05:08" itemprop="dateCreated datePublished" datetime="2023-06-12T21:58:33+10:00">2023-06-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,7 +270,7 @@
 <h2 id="714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><a href="#714-Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee" class="headerlink" title="714. Best Time to Buy and Sell Stock with Transaction Fee"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. Best Time to Buy and Sell Stock with Transaction Fee</a></h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><p>You are given an array prices where prices[i] is the price of a given stock on the ith day, and an integer fee representing a transaction fee.</p>
 <p>Find the maximum profit you can achieve. You may complete as many transactions as you like, but you need to pay the transaction fee for each transaction.</p>
 <p>Note: You may not engage in multiple transactions simultaneously (i.e., you must sell the stock before you buy again).</p>
-<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-DP-1"><a href="#1-DP-1" class="headerlink" title="1.DP"></a>1.DP</h4><p>It is almost the same to <a target="_blank" rel="noopener" href="https://zhaoyiwei0311.github.io/2023/05/28/Day39-Dynamic-Programming-Part02/">a</a>. Just with transaction fee.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><h4 id="1-DP-1"><a href="#1-DP-1" class="headerlink" title="1.DP"></a>1.DP</h4><p>It is almost the same to <a target="_blank" rel="noopener" href="https://zhaoyiwei0311.github.io/2023/06/12/Day49-Dynamic-Programming-Part10/">122. Best Time to Buy and Sell Stock II</a>. Just with transaction fee.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * DP</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProfit</span><span class="params">(<span class="type">int</span>[] prices, <span class="type">int</span> fee)</span> &#123;</span><br><span class="line">    <span class="comment">// 1.Confirm the meanings of DP table and its index</span></span><br><span class="line">    <span class="comment">//  dp[i][0] means the maximum money we can have while not keeping stock since</span></span><br><span class="line">    <span class="comment">//  yesterday or selling stock today</span></span><br><span class="line">    <span class="comment">//  dp[i][1] means the maximum money we can have while keeping stock since yesterday</span></span><br><span class="line">    <span class="comment">//  or buying it today</span></span><br><span class="line">    <span class="comment">// 2.Confirm formula</span></span><br><span class="line">    <span class="comment">//  for dp[i][0], we can keep void stock since yesterday or sell stock today,</span></span><br><span class="line">    <span class="comment">//  the maximum would be Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i] - fee)</span></span><br><span class="line">    <span class="comment">//  for dp[i][1], we can keep stock since yesterday or buy stock today,</span></span><br><span class="line">    <span class="comment">//  the maximum would be Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i])</span></span><br><span class="line">    <span class="comment">// 3.Initialize DP table</span></span><br><span class="line">    <span class="comment">//  dp[0][0] will be 0 and dp[0][1] would be - prices[0]</span></span><br><span class="line">    <span class="comment">// 4.Confirm iteration order</span></span><br><span class="line">    <span class="comment">//  from left to right</span></span><br><span class="line">    <span class="type">int</span>[][] table = <span class="keyword">new</span> <span class="title class_">int</span>[prices.length][<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> <span class="variable">BuyAndKeep</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> <span class="variable">SellAndVoid</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">    table[<span class="number">0</span>][<span class="number">0</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; prices.length; i++) &#123;</span><br><span class="line">        table[i][BuyAndKeep] = Math.max(table[i - <span class="number">1</span>][BuyAndKeep], table[i - <span class="number">1</span>][SellAndVoid] - prices[i]);</span><br><span class="line">        table[i][SellAndVoid] = Math.max(table[i - <span class="number">1</span>][SellAndVoid], table[i - <span class="number">1</span>][BuyAndKeep] + prices[i] - fee);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> table[prices.length - <span class="number">1</span>][SellAndVoid];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -297,7 +297,10 @@
     <a href="/2023/06/12/Day50-Dynamic-Programming-Part11/" rel="prev" title="Day50 Dynamic Programming Part11">
       <i class="fa fa-chevron-left"></i> Day50 Dynamic Programming Part11
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/15/Day52-Dynamic-Programming-Part13/" rel="next" title="Day52 Dynamic Programming Part13">
+      Day52 Dynamic Programming Part13 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -372,7 +375,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -385,7 +388,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -429,12 +432,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="Symbols count total">221k</span>
+    <span title="Symbols count total">237k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">3:21</span>
+    <span title="Reading time total">3:35</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
